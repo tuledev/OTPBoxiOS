@@ -140,6 +140,9 @@
 }
 
 - (void)showError: (NSString *)errorString {
+    if (errorString.length > 0) {
+        [self.otpInput showError:YES];
+    }
     [UIView animateWithDuration:0.25f animations:^{
         self.lbError.alpha = ([errorString isEqualToString:@""] || errorString == nil) ? 0 : 1;
         [self layoutIfNeeded];

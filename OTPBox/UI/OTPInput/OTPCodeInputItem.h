@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setSelected;
 - (void)setUnselected;
+- (void)error: (BOOL)hasError;
 - (void)updateValue: (NSString *) value;
 
 + (OTPCodeInputItem *)create;

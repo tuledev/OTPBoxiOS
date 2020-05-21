@@ -51,6 +51,12 @@
     [self.arrInput[otp.length >= self.arrInput.count ? self.arrInput.count - 1 : otp.length] setSelected];
 }
 
+- (void)showError: (BOOL) error {
+    for (int i=0; i < [self.arrInput count]; i++) {
+        [self.arrInput[i] error:error];
+    }
+}
+
 + (OTPInput *)createWithOTPLength:(NSInteger) otpLength {
     OTPInput * otpInput = [OTPInput new];
     [otpInput updateOTPLength:otpLength];

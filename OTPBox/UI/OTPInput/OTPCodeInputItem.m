@@ -29,6 +29,10 @@
     self.lbValue.text = value;
 }
 
+- (void)error: (BOOL)hasError {
+    self.backgroundColor = [UIColor colorWithHexString:@"c6334426"];
+}
+
 + (OTPCodeInputItem *)create {
     NSArray *bundle = [[NSBundle bundleWithIdentifier:@"Digipay.OTPBox"] loadNibNamed:@"OTPCodeInputItem"
                                                                                 owner:self options:nil];
