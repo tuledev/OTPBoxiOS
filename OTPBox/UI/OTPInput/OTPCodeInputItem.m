@@ -7,6 +7,8 @@
 //
 
 #import "OTPCodeInputItem.h"
+#import "../../Utils/UIColor+hex.m"
+
 @interface OTPCodeInputItem ()
 @property (weak, nonatomic) IBOutlet UIView *viewCursor;
 @property (weak, nonatomic) IBOutlet UILabel *lbValue;
@@ -16,11 +18,11 @@
 @implementation OTPCodeInputItem
 
 - (void)setSelected {
-    self.backgroundColor = [[UIColor alloc] initWithRed:0 green:124 blue:201 alpha:0.2];
+    self.backgroundColor = [UIColor colorWithHexString:@"0086c926"];
     self.viewCursor.hidden = false;
 }
 - (void)setUnselected {
-    self.backgroundColor = [[UIColor alloc] initWithRed:246 green:247 blue:250 alpha:1];
+    self.backgroundColor = [UIColor colorWithHexString:@"f6f7fa"];
     self.viewCursor.hidden = true;
 }
 - (void)updateValue: (NSString *) value {

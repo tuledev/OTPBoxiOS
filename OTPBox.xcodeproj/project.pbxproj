@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E52845324767B580047108C /* UIColor+hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E52845224767B580047108C /* UIColor+hex.m */; };
 		0E5DA1D42473F490004857AE /* OTPActionSMS.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E5DA1D32473F490004857AE /* OTPActionSMS.xib */; };
 		0E5DA1DE247512D0004857AE /* Font Awesome 5 Pro-Light-300.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0E5DA1D9247512D0004857AE /* Font Awesome 5 Pro-Light-300.otf */; };
 		0E5DA1DF247512D0004857AE /* Font Awesome 5 Pro-Regular-400.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0E5DA1DA247512D0004857AE /* Font Awesome 5 Pro-Regular-400.otf */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E52845224767B580047108C /* UIColor+hex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+hex.m"; sourceTree = "<group>"; };
 		0E5DA1D32473F490004857AE /* OTPActionSMS.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OTPActionSMS.xib; sourceTree = "<group>"; };
 		0E5DA1D9247512D0004857AE /* Font Awesome 5 Pro-Light-300.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Font Awesome 5 Pro-Light-300.otf"; sourceTree = "<group>"; };
 		0E5DA1DA247512D0004857AE /* Font Awesome 5 Pro-Regular-400.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Font Awesome 5 Pro-Regular-400.otf"; sourceTree = "<group>"; };
@@ -90,6 +92,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E52845124767B2B0047108C /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				0E52845224767B580047108C /* UIColor+hex.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		0E5DA1D7247512A8004857AE /* resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +180,7 @@
 		0EF4B63C2472803300E5683F /* OTPBox */ = {
 			isa = PBXGroup;
 			children = (
+				0E52845124767B2B0047108C /* Utils */,
 				0E7F52972472848400EB8350 /* UI */,
 				0EF4B63D2472803300E5683F /* OTPBox.h */,
 				0EF4B63E2472803300E5683F /* Info.plist */,
@@ -311,6 +322,7 @@
 				0E7F52BD2473D4C400EB8350 /* OTPInput.m in Sources */,
 				0E7F52C22473D65800EB8350 /* OTPCodeInputItem.m in Sources */,
 				0E7F529B247284A500EB8350 /* OTPBoxView.m in Sources */,
+				0E52845324767B580047108C /* UIColor+hex.m in Sources */,
 				0E6676D72473F10F00807CD8 /* OTPActionView.m in Sources */,
 				0E6676D12473E81700807CD8 /* OTPAction.m in Sources */,
 			);
