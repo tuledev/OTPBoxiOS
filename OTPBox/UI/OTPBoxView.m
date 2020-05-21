@@ -10,6 +10,7 @@
 #import "OTPBoxView.h"
 #import "OTPInput/OTPInput.h"
 #import "OTPAction/OTPActionView.h"
+#import "../Controller/OTPManager.h"
 
 @interface OTPBoxView()
 
@@ -20,13 +21,36 @@
 @property (weak, nonatomic) IBOutlet UITextField *tfOTP;
 
 @property (nonatomic, retain) NSString * otpString;
+@property (weak, nonatomic) IBOutlet UILabel *lbError;
+@property (weak, nonatomic) IBOutlet UILabel *lbLoading;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityLloading;
 
 @end
 
 @implementation OTPBoxView 
 @synthesize viewInputOTP;
 
--(void)awakeFromNib {
++ (OTPBoxView *)showIn: (UIView *) superview {
+    NSArray *bundle = [[NSBundle bundleWithIdentifier:@"Digipay.OTPBox"] loadNibNamed:@"OTPBoxView"
+                                                                                owner:self options:nil];
+    OTPBoxView *otpBoxView;
+    for (id object in bundle) {
+        if ([object isKindOfClass:[OTPBoxView class]]) {
+            otpBoxView = (OTPBoxView *)object;
+            break;
+        }
+    }
+    otpBoxView.frame = CGRectMake(0, 0, superview.frame.size.width, superview.frame.size.height);
+    
+    [superview addSubview:otpBoxView];
+    [otpBoxView renderWithConfig];
+    [otpBoxView showLoading:NO];
+    [otpBoxView showError:@""];
+    
+    return otpBoxView;
+}
+
+- (void)awakeFromNib {
     [super awakeFromNib];
     [OTPBoxView loadFontWithName:@"Font Awesome 5 Brands-Regular-400"];
     [OTPBoxView loadFontWithName:@"Font Awesome 5 Duotone-Solid-900"];
@@ -75,32 +99,64 @@
 }
 
 - (void)updateOTPCode: (NSString *)otp {
-    NSLog(otp);
     [self.otpInput updateOTPString:otp];
+    [self showError:@""];
+    
+    if (otp.length == 4) {
+        [self requestVerifyOTPCode:otp];
+    }
+}
+
+- (void)requestVerifyOTPCode: (NSString *)otp {
+    [self showLoading:YES];
+    __weak OTPBoxView *weakSelf = self;
+    [OTPManager verifyOTP:otp callback:^(NSString * _Nonnull error) {
+        if (weakSelf != nil) {
+            [weakSelf showLoading:NO];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [weakSelf showError:error];
+            });
+        }
+    }];
+}
+
+- (void)showLoading: (BOOL) loading {
+    [UIView animateWithDuration:0.25f animations:^{
+        self.lbLoading.alpha = loading ? 1 : 0;
+        self.activityLloading.alpha = self.lbLoading.alpha;
+        [self layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        if (finished) {
+            [UIView animateWithDuration:0.5f animations:^{
+                if (loading) {
+                    self.lbLoading.text = @"Đang kiểm tra";
+                } else {
+                    self.lbLoading.text = @"";
+                }
+                [self layoutIfNeeded];
+            }];
+        }
+    }];
+}
+
+- (void)showError: (NSString *)errorString {
+    [UIView animateWithDuration:0.25f animations:^{
+        self.lbError.alpha = ([errorString isEqualToString:@""] || errorString == nil) ? 0 : 1;
+        [self layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        if (finished) {
+            [UIView animateWithDuration:0.25f animations:^{
+                self.lbError.text = errorString;
+                [self layoutIfNeeded];
+            }];
+        }
+    }];
 }
 
 - (IBAction)onOKButtonTapped:(id)sender {
     if ([self.delegate respondsToSelector:@selector(okButtonTapped)]) {
         [self.delegate okButtonTapped];
     }
-}
-
-+ (OTPBoxView *)showIn: (UIView *) superview {
-    NSArray *bundle = [[NSBundle bundleWithIdentifier:@"Digipay.OTPBox"] loadNibNamed:@"OTPBoxView"
-                                                    owner:self options:nil];
-    OTPBoxView *otpBoxView;
-    for (id object in bundle) {
-        if ([object isKindOfClass:[OTPBoxView class]]) {
-            otpBoxView = (OTPBoxView *)object;
-            break;
-        }
-    }
-    otpBoxView.frame = CGRectMake(0, 0, superview.frame.size.width, superview.frame.size.height);
-    
-    [superview addSubview:otpBoxView];
-    [otpBoxView renderWithConfig];
-
-    return otpBoxView;
 }
 
 // TEXTFIELD
