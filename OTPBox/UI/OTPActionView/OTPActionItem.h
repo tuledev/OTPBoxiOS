@@ -1,5 +1,5 @@
 //
-//  OTPActionView.h
+//  OTPAction.h
 //  OTPBox
 //
 //  Created by tuledev on 5/19/20.
@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OTPActionDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface OTPActionView : UIView
+@interface OTPActionItem : UIView
 
-+ (OTPActionView *)createOTPActions;
+@property (nonatomic, weak) id <OTPBoxActionDelegate> delegate;
++ (OTPActionItem *)create: (NSInteger)type;
 
 @end
 

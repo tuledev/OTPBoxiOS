@@ -20,17 +20,17 @@
                     <rect key="frame" x="0.0" y="0.0" width="300" height="170"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aVN-5N-ueh">
-                            <rect key="frame" x="55" y="44" width="190" height="82.5"/>
+                            <rect key="frame" x="48.5" y="42.5" width="203" height="85"/>
                             <subviews>
                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="GAd-Bu-KAQ">
-                                    <rect key="frame" x="85" y="8" width="20" height="20"/>
+                                    <rect key="frame" x="91.5" y="8" width="20" height="20"/>
                                     <color key="color" red="0.0" green="0.52549019610000003" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                 </activityIndicatorView>
                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vsL-zj-ucd">
-                                    <rect key="frame" x="8" y="44" width="174" height="30.5"/>
+                                    <rect key="frame" x="8" y="44" width="187" height="33"/>
                                     <string key="text">Đang xử lý, 
 vui lòng không thoát lúc này!!!</string>
-                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -67,6 +67,7 @@ vui lòng không thoát lúc này!!!</string>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="82.608695652173921" y="35.491071428571423"/>
         </view>
     </objects>
 </document>

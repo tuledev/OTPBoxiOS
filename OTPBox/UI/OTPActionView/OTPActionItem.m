@@ -56,10 +56,14 @@
 }
 
 - (IBAction)onCallTapped:(id)sender {
-    NSLog(@"calllllllllllll");
+    if ([self.delegate respondsToSelector:@selector(onCallTapped)]) {
+        [self.delegate onCallTapped];
+    }
 }
 - (IBAction)onSMSTapped:(id)sender {
-    NSLog(@"sms");
+    if ([self.delegate respondsToSelector:@selector(onSMSTapped)]) {
+        [self.delegate onSMSTapped];
+    }
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {

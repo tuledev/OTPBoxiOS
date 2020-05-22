@@ -25,24 +25,26 @@
 }
 */
 
-- (void)updateAction {
+- (void)updateAction: (id<OTPBoxActionDelegate> _Nonnull)delegate {
     self.arrAction = [NSMutableArray new];
     
     [[self subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
-    self.frame = CGRectMake(0, 0, 2* 96 + 36, 20);
+    self.frame = CGRectMake(0, 0, 2* 96 + 50, 20);
     
     OTPActionItem * callAction = [OTPActionItem create:0];
     callAction.frame = CGRectMake(0, 0, 100, 20);
+    callAction.delegate = delegate;
     OTPActionItem * smsAction = [OTPActionItem create:1];
-    smsAction.frame = CGRectMake(100 + 36, 0, 100, 20);
+    smsAction.frame = CGRectMake(100 + 50, 0, 100, 20);
+    smsAction.delegate = delegate;
     [self addSubview:callAction];
     [self addSubview:smsAction];
 }
 
-+ (OTPActionView *)createOTPActions {
++ (OTPActionView *)createOTPActionsWithDelegate: (id<OTPBoxActionDelegate> _Nonnull)delegate {
     OTPActionView * otpAction = [OTPActionView new];
-    [otpAction updateAction];
+    [otpAction updateAction: delegate];
     return otpAction;
 }
 

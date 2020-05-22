@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="OTPBoxExpiredView" id="dkU-Dc-HvZ" userLabel="OTPBoxExpiredView" customClass="OTPExpiredView">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="228"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" horizontalHuggingPriority="900" verticalHuggingPriority="900" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="900" translatesAutoresizingMaskIntoConstraints="NO" id="Oym-7F-HO8">
+                    <rect key="frame" x="0.0" y="0.0" width="300" height="228"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="902" verticalHuggingPriority="902" horizontalCompressionResistancePriority="902" verticalCompressionResistancePriority="902" image="ic_expired" translatesAutoresizingMaskIntoConstraints="NO" id="Gyq-Gu-dP4">
+                            <rect key="frame" x="100" y="16" width="100" height="100"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="100" id="SYv-jo-t2W"/>
+                                <constraint firstAttribute="height" constant="100" id="bXC-Sm-cY1"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="900" verticalHuggingPriority="900" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="900" text="Phiên xác thực đã hết hiệu lực" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogf-X0-Olc">
+                            <rect key="frame" x="39.5" y="128" width="221" height="20"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                            <color key="textColor" red="0.73725490196078436" green="0.058823529411764705" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="901" verticalHuggingPriority="901" horizontalCompressionResistancePriority="901" verticalCompressionResistancePriority="901" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dV9-fe-aCX">
+                            <rect key="frame" x="95" y="164" width="110" height="40"/>
+                            <color key="backgroundColor" red="0.0" green="0.52549019610000003" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="Ibb-fZ-A6d"/>
+                                <constraint firstAttribute="width" constant="110" id="i3H-HO-y8b"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                            <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="2"/>
+                            <state key="normal" title="Quay lại">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="20"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="onBackTapped:" destination="dkU-Dc-HvZ" eventType="touchUpInside" id="Nwr-Te-WoH"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="dV9-fe-aCX" firstAttribute="centerX" secondItem="Oym-7F-HO8" secondAttribute="centerX" id="3GQ-PC-K2X"/>
+                        <constraint firstItem="Gyq-Gu-dP4" firstAttribute="top" secondItem="Oym-7F-HO8" secondAttribute="top" constant="16" id="7ve-QK-904"/>
+                        <constraint firstAttribute="bottom" secondItem="dV9-fe-aCX" secondAttribute="bottom" constant="24" id="Ae2-x8-8bY"/>
+                        <constraint firstItem="Gyq-Gu-dP4" firstAttribute="centerX" secondItem="Oym-7F-HO8" secondAttribute="centerX" id="Elb-tb-kwL"/>
+                        <constraint firstItem="ogf-X0-Olc" firstAttribute="centerX" secondItem="Oym-7F-HO8" secondAttribute="centerX" id="St0-7d-PZW"/>
+                        <constraint firstItem="ogf-X0-Olc" firstAttribute="top" secondItem="Gyq-Gu-dP4" secondAttribute="bottom" constant="12" id="ZwX-Xg-aqK"/>
+                        <constraint firstItem="dV9-fe-aCX" firstAttribute="top" secondItem="ogf-X0-Olc" secondAttribute="bottom" constant="16" id="fwF-3l-wt2"/>
+                        <constraint firstAttribute="width" constant="300" id="k82-As-HXV"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="inH-F4-ZAv"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Oym-7F-HO8" firstAttribute="leading" secondItem="dkU-Dc-HvZ" secondAttribute="leading" id="AHS-nz-qtM"/>
+                <constraint firstAttribute="trailing" secondItem="Oym-7F-HO8" secondAttribute="trailing" id="Jg7-cx-9Dq"/>
+                <constraint firstItem="Oym-7F-HO8" firstAttribute="top" secondItem="dkU-Dc-HvZ" secondAttribute="top" id="ha0-N4-EBp"/>
+                <constraint firstAttribute="bottom" secondItem="Oym-7F-HO8" secondAttribute="bottom" id="mG0-wv-81j"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="abq-vE-qbS"/>
+            <point key="canvasLocation" x="82.608695652173921" y="52.901785714285715"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_expired" width="140" height="108"/>
+    </resources>
+</document>

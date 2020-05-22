@@ -8,18 +8,21 @@
 
 #import <CoreText/CoreText.h>
 #import "OTPBoxView.h"
-#import "OTPInput/OTPInputView.h"
-#import "OTPAction/OTPActionView.h"
-#import "../Controller/OTPManager.h"
-#import "../Utils/UIView+nib.m"
+#import "../OTPInputView/OTPInputView.h"
+#import "../../Controller/OTPManager.h"
+#import "../../Utils/UIView+nib.m"
+#import "../OTPActionView/OTPActionView.h"
+#import "../OTPExpiredView/OTPExpiredView.h"
 
 @interface OTPBoxView()
 
 @property (nonatomic, retain) OTPInputView * otpInput;
 @property (nonatomic, retain) OTPActionView * otpAction;
+@property (weak, nonatomic) IBOutlet UIView *otpInputContainerView;
 @property (weak, nonatomic) IBOutlet UIView *otpBoxContainerView;
 @property (weak, nonatomic) IBOutlet UIView *overlayView;
 @property (nonatomic, weak) UIView * initLoadingView;
+@property (nonatomic, weak) OTPExpiredView * expiredView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraintOTPInputView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraintOTPActionView;
 @property (weak, nonatomic) IBOutlet UITextField *tfOTP;
@@ -31,6 +34,7 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityLloading;
 
 @property (nonatomic) BOOL loading;
+@property (nonatomic) BOOL expired;
 
 @end
 
@@ -53,6 +57,13 @@
     [otpBoxView renderWithConfig];
     [otpBoxView showLoading:NO];
     [otpBoxView showError:@""];
+    [otpBoxView showInitLoading];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [otpBoxView removeInitLoading];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [otpBoxView showExpiredView];
+    });
+    });
 
     return otpBoxView;
 }
@@ -66,16 +77,13 @@
     [OTPBoxView loadFontWithName:@"Font Awesome 5 Pro-Solid-900"];
     self.tfOTP.delegate = self;
     self.loading = NO;
+    self.expired = NO;
     
 //    [self showInitLoading];
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //        [self removeInitLoading];
 //    });
     
-        [self showInitLoading];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-    [self removeInitLoading];
-    });
 }
 
 + (void)loadFontWithName:(NSString *)fontName
@@ -110,7 +118,7 @@
     [self.widthConstraintOTPInputView setConstant:self.otpInput.frame.size.width];
     [self.viewInputOTP addSubview:self.otpInput];
     
-    self.otpAction = [OTPActionView createOTPActions];
+    self.otpAction = [OTPActionView createOTPActionsWithDelegate:self];
     [self.widthConstraintOTPActionView setConstant:self.otpAction.frame.size.width];
     [self.viewAction addSubview:self.otpAction];
     [self.tfOTP becomeFirstResponder];
@@ -151,15 +159,18 @@
         }
         
         self.initLoadingView = initLoadingView;
-//        self.initLoadingView = [UIView loadViewFromNibNamed:@"OTPBoxViewLoading" owner:self];
     }
     [self.initLoadingView removeFromSuperview];
     self.overlayView.frame = self.initLoadingView.frame;
     [self.overlayView addSubview:self.initLoadingView];
     self.heightConstraintOPTBoxView.priority = 999;
-    [self bringSubviewToFront:self.overlayView];
-    [self setNeedsUpdateConstraints];
-    [self layoutIfNeeded];
+    [self.otpBoxContainerView bringSubviewToFront:self.overlayView];
+    self.otpInputContainerView.alpha = 0;
+    [UIView animateWithDuration:0.35f animations:^{
+        self.overlayView.alpha = 1;
+        [self setNeedsUpdateConstraints];
+        [self layoutIfNeeded];
+    }];
 }
 
 - (void)removeInitLoading {
@@ -167,10 +178,57 @@
     [UIView animateWithDuration:0.35f animations:^{
         [self.otpBoxContainerView layoutIfNeeded];
         self.overlayView.alpha = 0;
+        self.otpInputContainerView.alpha = 1;
     } completion:^(BOOL finished) {
         if (finished) {
             if (self.initLoadingView != nil) {
-                [self sendSubviewToBack:self.overlayView];
+                [self.otpBoxContainerView sendSubviewToBack:self.overlayView];
+                [self.initLoadingView removeFromSuperview];
+            }
+        }
+    }];
+}
+
+- (void)showExpiredView {
+    self.expired = YES;
+    if (self.expiredView == nil) {
+        NSArray *bundle = [[NSBundle bundleWithIdentifier:@"Digipay.OTPBox"] loadNibNamed:@"OTPBoxExpiredView"
+                                                                                    owner:self options:nil];
+        OTPExpiredView *expiredView;
+        for (id object in bundle) {
+            if ([object isKindOfClass:[OTPExpiredView class]]) {
+                expiredView = (OTPExpiredView *)object;
+                break;
+            }
+        }
+        
+        self.expiredView = expiredView;
+        self.expiredView.delegate = self;
+    }
+    [self.expiredView removeFromSuperview];
+    [self.expiredView layoutIfNeeded];
+    self.overlayView.frame = self.expiredView.frame;
+    self.heightConstraintOPTBoxView.priority = 999;
+    [self.overlayView addSubview:self.expiredView];
+    [self.otpBoxContainerView bringSubviewToFront:self.overlayView];
+    self.otpInputContainerView.alpha = 0;
+    [UIView animateWithDuration:0.35f animations:^{
+        self.overlayView.alpha = 1;
+        [self setNeedsUpdateConstraints];
+        [self layoutIfNeeded];
+    }];
+}
+
+- (void)removeExpiredView {
+    self.heightConstraintOPTBoxView.priority = 200;
+    [UIView animateWithDuration:0.35f animations:^{
+        [self.otpBoxContainerView layoutIfNeeded];
+        self.overlayView.alpha = 0;
+        self.otpInputContainerView.alpha = 1;
+    } completion:^(BOOL finished) {
+        if (finished) {
+            if (self.initLoadingView != nil) {
+                [self.otpBoxContainerView sendSubviewToBack:self.overlayView];
                 [self.initLoadingView removeFromSuperview];
             }
         }
@@ -214,10 +272,22 @@
     }];
 }
 
-- (IBAction)onOKButtonTapped:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(okButtonTapped)]) {
-        [self.delegate okButtonTapped];
-    }
+- (void)onCallTapped {
+    [self showExpiredView];
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [self removeExpiredView];
+//    });
+//    if ([self.delegate respondsToSelector:@selector(okButtonTapped)]) {
+//        [self.delegate okButtonTapped];
+//    }
+}
+
+- (void)onSMSTapped {
+    
+}
+
+- (void)onBackTapped {
+    [self removeFromSuperview];
 }
 
 - (IBAction)onCloseTapped:(id)sender {
@@ -227,7 +297,7 @@
 // TEXTFIELD
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if (self.loading == YES) return NO;
+    if (self.loading == YES || self.expired == YES) return NO;
     
     const char * _char = [string cStringUsingEncoding:NSUTF8StringEncoding];
     int isBackSpace = strcmp(_char, "\b");

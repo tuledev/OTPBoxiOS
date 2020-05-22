@@ -17,10 +17,15 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="Utq-Gq-bk3">
-                    <rect key="frame" x="57" y="185" width="300" height="272"/>
+                    <rect key="frame" x="57" y="186" width="300" height="270"/>
                     <subviews>
+                        <view contentMode="scaleToFill" horizontalHuggingPriority="900" verticalHuggingPriority="900" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="900" translatesAutoresizingMaskIntoConstraints="NO" id="NXT-qi-E5K" userLabel="OverlayView">
+                            <rect key="frame" x="0.0" y="0.0" width="300" height="270"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <viewLayoutGuide key="safeArea" id="n5J-8P-VHR"/>
+                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fsu-jz-l5k" userLabel="InputOTP">
-                            <rect key="frame" x="0.0" y="0.0" width="300" height="272"/>
+                            <rect key="frame" x="0.0" y="0.0" width="300" height="270"/>
                             <subviews>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="leq-WD-bSd" userLabel="textfield">
                                     <rect key="frame" x="150" y="70" width="0.0" height="30"/>
@@ -34,7 +39,7 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nhập 4 mã xác thực được gửi bằng Tin nhắn tới số điện thoại xxx 7124 " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CfQ-4U-pqk" userLabel="title">
                                     <rect key="frame" x="16" y="16" width="268" height="33"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                    <nil key="textColor"/>
+                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" horizontalHuggingPriority="900" verticalHuggingPriority="900" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="900" translatesAutoresizingMaskIntoConstraints="NO" id="aNX-Xj-u7E" userLabel="input">
@@ -92,15 +97,15 @@
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="253" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LRJ-4W-TQh" userLabel="note">
-                                    <rect key="frame" x="16" y="177" width="268" height="35"/>
+                                    <rect key="frame" x="16" y="177" width="268" height="33"/>
                                     <string key="text">Nếu không nhận được mã xác thực,
 bấm gửi lại qua</string>
-                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                     <color key="textColor" red="0.14117647058823529" green="0.14509803921568626" blue="0.23921568627450979" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="901" verticalHuggingPriority="901" horizontalCompressionResistancePriority="901" verticalCompressionResistancePriority="901" translatesAutoresizingMaskIntoConstraints="NO" id="Luq-2U-oAI" userLabel="action">
-                                    <rect key="frame" x="125" y="232" width="50" height="24"/>
+                                    <rect key="frame" x="125" y="230" width="50" height="24"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="24" id="X3G-8F-x0n"/>
@@ -141,11 +146,6 @@ bấm gửi lại qua</string>
                                     <integer key="value" value="10"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
-                        </view>
-                        <view contentMode="scaleToFill" horizontalHuggingPriority="900" verticalHuggingPriority="900" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="900" translatesAutoresizingMaskIntoConstraints="NO" id="NXT-qi-E5K" userLabel="OverlayView">
-                            <rect key="frame" x="0.0" y="0.0" width="300" height="272"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <viewLayoutGuide key="safeArea" id="n5J-8P-VHR"/>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -190,6 +190,7 @@ bấm gửi lại qua</string>
                 <outlet property="lbLoading" destination="ThH-IL-dgd" id="Ine-P6-NZW"/>
                 <outlet property="lbTitle" destination="CfQ-4U-pqk" id="0aZ-th-DB9"/>
                 <outlet property="otpBoxContainerView" destination="Utq-Gq-bk3" id="Sjq-eh-Dv4"/>
+                <outlet property="otpInputContainerView" destination="fsu-jz-l5k" id="Qwj-bg-FDI"/>
                 <outlet property="overlayView" destination="NXT-qi-E5K" id="kXo-9q-abS"/>
                 <outlet property="tfOTP" destination="leq-WD-bSd" id="juO-pD-IND"/>
                 <outlet property="viewAction" destination="Luq-2U-oAI" id="Mpz-D7-GYa"/>
