@@ -18,11 +18,15 @@
 @implementation OTPCodeInputItem
 
 - (void)setSelected {
-    self.backgroundColor = [UIColor colorWithHexString:@"0086c926"];
+    [UIView animateWithDuration:0.5 animations:^{
+        self.backgroundColor = [UIColor colorWithHexString:@"0086c926"];
+    }];
     self.viewCursor.hidden = false;
 }
 - (void)setUnselected {
-    self.backgroundColor = [UIColor colorWithHexString:@"f6f7fa"];
+    [UIView animateWithDuration:0.5 animations:^{
+        self.backgroundColor = [UIColor colorWithHexString:@"f6f7fa"];
+    }];
     self.viewCursor.hidden = true;
 }
 - (void)updateValue: (NSString *) value {
@@ -30,7 +34,9 @@
 }
 
 - (void)error: (BOOL)hasError {
-    self.backgroundColor = [UIColor colorWithHexString:@"c6334426"];
+    [UIView animateWithDuration:0.5 animations:^{
+        self.backgroundColor = [UIColor colorWithHexString:@"c6334426"];
+    }];
 }
 
 + (OTPCodeInputItem *)create {

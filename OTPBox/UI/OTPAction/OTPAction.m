@@ -18,6 +18,30 @@
 
 @implementation OTPAction
 
++ (OTPAction *)create: (NSInteger)type {
+    NSArray *bundle = [[NSBundle bundleWithIdentifier:@"Digipay.OTPBox"]
+                       loadNibNamed: type == 0 ? @"OTPActionCall" : @"OTPActionSMS"
+                       owner:self options:nil];
+    OTPAction * item;
+    for (id object in bundle) {
+        if ([object isKindOfClass:[OTPAction class]]) {
+            item = (OTPAction *)object;
+            break;
+        }
+    }
+    [item configUI];
+    
+    return item;
+}
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action: [self.restorationIdentifier isEqualToString:@"OTPActionCall"] ? @selector(onCallTapped:) : @selector(onSMSTapped:)];
+    [self addGestureRecognizer:gestureRecognizer];
+    self.userInteractionEnabled = YES;
+    gestureRecognizer.cancelsTouchesInView = NO;
+}
+
 - (void) configUI {
 //    if (self.lbIconCall != nil) {
 //        [self.lbIconCall removeFromSuperview];
@@ -35,22 +59,25 @@
     NSLog(@"calllllllllllll");
 }
 - (IBAction)onSMSTapped:(id)sender {
+    NSLog(@"sms");
 }
 
-+ (OTPAction *)create: (NSInteger)type {
-    NSArray *bundle = [[NSBundle bundleWithIdentifier:@"Digipay.OTPBox"]
-                       loadNibNamed: type == 0 ? @"OTPActionCall" : @"OTPActionSMS"
-                       owner:self options:nil];
-    OTPAction * item;
-    for (id object in bundle) {
-        if ([object isKindOfClass:[OTPAction class]]) {
-            item = (OTPAction *)object;
-            break;
-        }
-    }
-    [item configUI];
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [UIView animateWithDuration:0.1 animations:^{
+        self.alpha = 0.1;
+    }];
+}
 
-    return item;
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [UIView animateWithDuration:0.25 animations:^{
+        self.alpha = 1;
+    }];
+}
+
+- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [UIView animateWithDuration:0.25 animations:^{
+        self.alpha = 1;
+    }];
 }
 
 @end

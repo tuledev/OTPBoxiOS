@@ -113,7 +113,7 @@
     [OTPManager verifyOTP:otp callback:^(NSString * _Nonnull error) {
         if (weakSelf != nil) {
             [weakSelf showLoading:NO];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [weakSelf showError:error];
             });
         }
@@ -121,13 +121,13 @@
 }
 
 - (void)showLoading: (BOOL) loading {
-    [UIView animateWithDuration:0.25f animations:^{
+    [UIView animateWithDuration:0.35f animations:^{
         self.lbLoading.alpha = loading ? 1 : 0;
         self.activityLloading.alpha = self.lbLoading.alpha;
         [self layoutIfNeeded];
     } completion:^(BOOL finished) {
         if (finished) {
-            [UIView animateWithDuration:0.5f animations:^{
+            [UIView animateWithDuration:0.35f animations:^{
                 if (loading) {
                     self.lbLoading.text = @"Đang kiểm tra";
                 } else {
@@ -143,12 +143,12 @@
     if (errorString.length > 0) {
         [self.otpInput showError:YES];
     }
-    [UIView animateWithDuration:0.25f animations:^{
+    [UIView animateWithDuration:0.35f animations:^{
         self.lbError.alpha = ([errorString isEqualToString:@""] || errorString == nil) ? 0 : 1;
         [self layoutIfNeeded];
     } completion:^(BOOL finished) {
         if (finished) {
-            [UIView animateWithDuration:0.25f animations:^{
+            [UIView animateWithDuration:0.35f animations:^{
                 self.lbError.text = errorString;
                 [self layoutIfNeeded];
             }];

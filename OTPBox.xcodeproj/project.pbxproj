@@ -150,12 +150,12 @@
 		0E6676C72473E76000807CD8 /* OTPAction */ = {
 			isa = PBXGroup;
 			children = (
-				0E5DA1D32473F490004857AE /* OTPActionSMS.xib */,
-				0E6676C82473E7C700807CD8 /* OTPActionCall.xib */,
-				0E6676CE2473E81700807CD8 /* OTPAction.h */,
-				0E6676CF2473E81700807CD8 /* OTPAction.m */,
 				0E6676D42473F10F00807CD8 /* OTPActionView.h */,
 				0E6676D52473F10F00807CD8 /* OTPActionView.m */,
+				0E6676CE2473E81700807CD8 /* OTPAction.h */,
+				0E6676CF2473E81700807CD8 /* OTPAction.m */,
+				0E5DA1D32473F490004857AE /* OTPActionSMS.xib */,
+				0E6676C82473E7C700807CD8 /* OTPActionCall.xib */,
 			);
 			path = OTPAction;
 			sourceTree = "<group>";
@@ -163,11 +163,11 @@
 		0E7F52972472848400EB8350 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				0E7F52BE2473D63700EB8350 /* OTPInput */,
 				0E6676C72473E76000807CD8 /* OTPAction */,
 				0EF4B654247283AC00E5683F /* OTPBoxView.xib */,
 				0E7F5298247284A500EB8350 /* OTPBoxView.h */,
 				0E7F5299247284A500EB8350 /* OTPBoxView.m */,
-				0E7F52BE2473D63700EB8350 /* OTPInput */,
 			);
 			path = UI;
 			sourceTree = "<group>";
