@@ -6,9 +6,9 @@
 //  Copyright © 2020 Digitel. All rights reserved.
 //
 
-#import "OTPAction.h"
+#import "OTPActionItem.h"
 
-@interface OTPAction()
+@interface OTPActionItem()
 @property (weak, nonatomic) IBOutlet UILabel *lbIconCall;
 @property (weak, nonatomic) IBOutlet UILabel *lbIconSMS;
 @property (weak, nonatomic) IBOutlet UIButton *btnCall;
@@ -16,16 +16,16 @@
 
 @end
 
-@implementation OTPAction
+@implementation OTPActionItem
 
-+ (OTPAction *)create: (NSInteger)type {
++ (OTPActionItem *)create: (NSInteger)type {
     NSArray *bundle = [[NSBundle bundleWithIdentifier:@"Digipay.OTPBox"]
                        loadNibNamed: type == 0 ? @"OTPActionCall" : @"OTPActionSMS"
                        owner:self options:nil];
-    OTPAction * item;
+    OTPActionItem * item;
     for (id object in bundle) {
-        if ([object isKindOfClass:[OTPAction class]]) {
-            item = (OTPAction *)object;
+        if ([object isKindOfClass:[OTPActionItem class]]) {
+            item = (OTPActionItem *)object;
             break;
         }
     }

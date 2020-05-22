@@ -10,12 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface OTPInput : UIView
+@interface OTPInputView : UIView
 
 - (void)updateOTPString: (NSString *)otp;
 - (void)showError: (BOOL) error;
 
-+ (OTPInput *)createWithOTPLength:(NSInteger) otpLength;
++ (OTPInputView *)createWithOTPLength:(NSInteger) otpLength;
 
 @end
 

@@ -7,7 +7,7 @@
 //
 
 #import "OTPActionView.h"
-#import "OTPAction.h"
+#import "OTPActionItem.h"
 
 @interface OTPActionView()
 
@@ -32,9 +32,9 @@
     
     self.frame = CGRectMake(0, 0, 2* 96 + 36, 20);
     
-    OTPAction * callAction = [OTPAction create:0];
+    OTPActionItem * callAction = [OTPActionItem create:0];
     callAction.frame = CGRectMake(0, 0, 100, 20);
-    OTPAction * smsAction = [OTPAction create:1];
+    OTPActionItem * smsAction = [OTPActionItem create:1];
     smsAction.frame = CGRectMake(100 + 36, 0, 100, 20);
     [self addSubview:callAction];
     [self addSubview:smsAction];

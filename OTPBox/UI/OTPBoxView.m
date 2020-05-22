@@ -8,22 +8,29 @@
 
 #import <CoreText/CoreText.h>
 #import "OTPBoxView.h"
-#import "OTPInput/OTPInput.h"
+#import "OTPInput/OTPInputView.h"
 #import "OTPAction/OTPActionView.h"
 #import "../Controller/OTPManager.h"
+#import "../Utils/UIView+nib.m"
 
 @interface OTPBoxView()
 
-@property (nonatomic, retain) OTPInput * otpInput;
+@property (nonatomic, retain) OTPInputView * otpInput;
 @property (nonatomic, retain) OTPActionView * otpAction;
+@property (weak, nonatomic) IBOutlet UIView *otpBoxContainerView;
+@property (weak, nonatomic) IBOutlet UIView *overlayView;
+@property (nonatomic, weak) UIView * initLoadingView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraintOTPInputView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraintOTPActionView;
 @property (weak, nonatomic) IBOutlet UITextField *tfOTP;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraintOPTBoxView;
 
 @property (nonatomic, retain) NSString * otpString;
 @property (weak, nonatomic) IBOutlet UILabel *lbError;
 @property (weak, nonatomic) IBOutlet UILabel *lbLoading;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityLloading;
+
+@property (nonatomic) BOOL loading;
 
 @end
 
@@ -46,7 +53,7 @@
     [otpBoxView renderWithConfig];
     [otpBoxView showLoading:NO];
     [otpBoxView showError:@""];
-    
+
     return otpBoxView;
 }
 
@@ -58,6 +65,17 @@
     [OTPBoxView loadFontWithName:@"Font Awesome 5 Pro-Regular-400"];
     [OTPBoxView loadFontWithName:@"Font Awesome 5 Pro-Solid-900"];
     self.tfOTP.delegate = self;
+    self.loading = NO;
+    
+//    [self showInitLoading];
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [self removeInitLoading];
+//    });
+    
+        [self showInitLoading];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    [self removeInitLoading];
+    });
 }
 
 + (void)loadFontWithName:(NSString *)fontName
@@ -88,7 +106,7 @@
 }
 
 - (void)renderWithConfig {
-    self.otpInput = [OTPInput createWithOTPLength:4];
+    self.otpInput = [OTPInputView createWithOTPLength:4];
     [self.widthConstraintOTPInputView setConstant:self.otpInput.frame.size.width];
     [self.viewInputOTP addSubview:self.otpInput];
     
@@ -120,7 +138,47 @@
     }];
 }
 
+- (void)showInitLoading {
+    if (self.initLoadingView == nil) {
+        NSArray *bundle = [[NSBundle bundleWithIdentifier:@"Digipay.OTPBox"] loadNibNamed:@"OTPBoxViewLoading"
+                                                                                    owner:self options:nil];
+        UIView *initLoadingView;
+        for (id object in bundle) {
+            if ([object isKindOfClass:[UIView class]]) {
+                initLoadingView = (UIView *)object;
+                break;
+            }
+        }
+        
+        self.initLoadingView = initLoadingView;
+//        self.initLoadingView = [UIView loadViewFromNibNamed:@"OTPBoxViewLoading" owner:self];
+    }
+    [self.initLoadingView removeFromSuperview];
+    self.overlayView.frame = self.initLoadingView.frame;
+    [self.overlayView addSubview:self.initLoadingView];
+    self.heightConstraintOPTBoxView.priority = 999;
+    [self bringSubviewToFront:self.overlayView];
+    [self setNeedsUpdateConstraints];
+    [self layoutIfNeeded];
+}
+
+- (void)removeInitLoading {
+    self.heightConstraintOPTBoxView.priority = 200;
+    [UIView animateWithDuration:0.35f animations:^{
+        [self.otpBoxContainerView layoutIfNeeded];
+        self.overlayView.alpha = 0;
+    } completion:^(BOOL finished) {
+        if (finished) {
+            if (self.initLoadingView != nil) {
+                [self sendSubviewToBack:self.overlayView];
+                [self.initLoadingView removeFromSuperview];
+            }
+        }
+    }];
+}
+
 - (void)showLoading: (BOOL) loading {
+    self.loading = loading;
     [UIView animateWithDuration:0.35f animations:^{
         self.lbLoading.alpha = loading ? 1 : 0;
         self.activityLloading.alpha = self.lbLoading.alpha;
@@ -162,9 +220,15 @@
     }
 }
 
+- (IBAction)onCloseTapped:(id)sender {
+    [self removeFromSuperview];
+}
+
 // TEXTFIELD
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if (self.loading == YES) return NO;
+    
     const char * _char = [string cStringUsingEncoding:NSUTF8StringEncoding];
     int isBackSpace = strcmp(_char, "\b");
     

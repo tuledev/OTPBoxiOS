@@ -10,9 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface OTPAction : UIView
+@interface OTPActionItem : UIView
 
-+ (OTPAction *)create: (NSInteger)type;
++ (OTPActionItem *)create: (NSInteger)type;
 
 @end
 

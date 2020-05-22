@@ -6,17 +6,17 @@
 //  Copyright © 2020 Digitel. All rights reserved.
 //
 
-#import "OTPInput.h"
+#import "OTPInputView.h"
 #import "OTPCodeInputItem.h"
 
-@interface OTPInput ()
+@interface OTPInputView ()
 
 @property (nonatomic) NSInteger otpLength;
 @property (nonatomic, retain) NSMutableArray<OTPCodeInputItem *> * arrInput;
 
 @end
 
-@implementation OTPInput
+@implementation OTPInputView
 
 @synthesize otpLength;
 @synthesize arrInput;
@@ -57,8 +57,8 @@
     }
 }
 
-+ (OTPInput *)createWithOTPLength:(NSInteger) otpLength {
-    OTPInput * otpInput = [OTPInput new];
++ (OTPInputView *)createWithOTPLength:(NSInteger) otpLength {
+    OTPInputView * otpInput = [OTPInputView new];
     [otpInput updateOTPLength:otpLength];
     return otpInput;
 }

@@ -19,18 +19,20 @@
 		0E5DA1E1247512D0004857AE /* Font Awesome 5 Pro-Solid-900.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0E5DA1DC247512D0004857AE /* Font Awesome 5 Pro-Solid-900.otf */; };
 		0E5DA1E2247512D0004857AE /* Font Awesome 5 Brands-Regular-400.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0E5DA1DD247512D0004857AE /* Font Awesome 5 Brands-Regular-400.otf */; };
 		0E6676C92473E7C700807CD8 /* OTPActionCall.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E6676C82473E7C700807CD8 /* OTPActionCall.xib */; };
-		0E6676D02473E81700807CD8 /* OTPAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E6676CE2473E81700807CD8 /* OTPAction.h */; };
-		0E6676D12473E81700807CD8 /* OTPAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6676CF2473E81700807CD8 /* OTPAction.m */; };
+		0E6676D02473E81700807CD8 /* OTPActionItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E6676CE2473E81700807CD8 /* OTPActionItem.h */; };
+		0E6676D12473E81700807CD8 /* OTPActionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6676CF2473E81700807CD8 /* OTPActionItem.m */; };
 		0E6676D32473E8D600807CD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E6676D22473E8D600807CD8 /* Assets.xcassets */; };
 		0E6676D62473F10F00807CD8 /* OTPActionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E6676D42473F10F00807CD8 /* OTPActionView.h */; };
 		0E6676D72473F10F00807CD8 /* OTPActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6676D52473F10F00807CD8 /* OTPActionView.m */; };
 		0E7F529A247284A500EB8350 /* OTPBoxView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E7F5298247284A500EB8350 /* OTPBoxView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0E7F529B247284A500EB8350 /* OTPBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F5299247284A500EB8350 /* OTPBoxView.m */; };
-		0E7F52BC2473D4C400EB8350 /* OTPInput.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E7F52BA2473D4C300EB8350 /* OTPInput.h */; };
-		0E7F52BD2473D4C400EB8350 /* OTPInput.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F52BB2473D4C300EB8350 /* OTPInput.m */; };
+		0E7F52BC2473D4C400EB8350 /* OTPInputView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E7F52BA2473D4C300EB8350 /* OTPInputView.h */; };
+		0E7F52BD2473D4C400EB8350 /* OTPInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F52BB2473D4C300EB8350 /* OTPInputView.m */; };
 		0E7F52C12473D65800EB8350 /* OTPCodeInputItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E7F52BF2473D65800EB8350 /* OTPCodeInputItem.h */; };
 		0E7F52C22473D65800EB8350 /* OTPCodeInputItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F52C02473D65800EB8350 /* OTPCodeInputItem.m */; };
 		0E7F52C42473D70300EB8350 /* OTPCodeInputItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E7F52C32473D70300EB8350 /* OTPCodeInputItem.xib */; };
+		0EC5245624778D1A003E9063 /* OTPBoxViewLoading.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EC5245524778D1A003E9063 /* OTPBoxViewLoading.xib */; };
+		0EC5245924779084003E9063 /* UIView+nib.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC5245824779084003E9063 /* UIView+nib.m */; };
 		0EF4B6442472803400E5683F /* OTPBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EF4B63A2472803300E5683F /* OTPBox.framework */; };
 		0EF4B6492472803400E5683F /* OTPBoxTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF4B6482472803400E5683F /* OTPBoxTests.m */; };
 		0EF4B64B2472803400E5683F /* OTPBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 0EF4B63D2472803300E5683F /* OTPBox.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -60,18 +62,20 @@
 		0E5DA1DC247512D0004857AE /* Font Awesome 5 Pro-Solid-900.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Font Awesome 5 Pro-Solid-900.otf"; sourceTree = "<group>"; };
 		0E5DA1DD247512D0004857AE /* Font Awesome 5 Brands-Regular-400.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Font Awesome 5 Brands-Regular-400.otf"; sourceTree = "<group>"; };
 		0E6676C82473E7C700807CD8 /* OTPActionCall.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OTPActionCall.xib; sourceTree = "<group>"; };
-		0E6676CE2473E81700807CD8 /* OTPAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTPAction.h; sourceTree = "<group>"; };
-		0E6676CF2473E81700807CD8 /* OTPAction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTPAction.m; sourceTree = "<group>"; };
+		0E6676CE2473E81700807CD8 /* OTPActionItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTPActionItem.h; sourceTree = "<group>"; };
+		0E6676CF2473E81700807CD8 /* OTPActionItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTPActionItem.m; sourceTree = "<group>"; };
 		0E6676D22473E8D600807CD8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E6676D42473F10F00807CD8 /* OTPActionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTPActionView.h; sourceTree = "<group>"; };
 		0E6676D52473F10F00807CD8 /* OTPActionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTPActionView.m; sourceTree = "<group>"; };
 		0E7F5298247284A500EB8350 /* OTPBoxView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTPBoxView.h; sourceTree = "<group>"; };
 		0E7F5299247284A500EB8350 /* OTPBoxView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTPBoxView.m; sourceTree = "<group>"; };
-		0E7F52BA2473D4C300EB8350 /* OTPInput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTPInput.h; sourceTree = "<group>"; };
-		0E7F52BB2473D4C300EB8350 /* OTPInput.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTPInput.m; sourceTree = "<group>"; };
+		0E7F52BA2473D4C300EB8350 /* OTPInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTPInputView.h; sourceTree = "<group>"; };
+		0E7F52BB2473D4C300EB8350 /* OTPInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTPInputView.m; sourceTree = "<group>"; };
 		0E7F52BF2473D65800EB8350 /* OTPCodeInputItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTPCodeInputItem.h; sourceTree = "<group>"; };
 		0E7F52C02473D65800EB8350 /* OTPCodeInputItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTPCodeInputItem.m; sourceTree = "<group>"; };
 		0E7F52C32473D70300EB8350 /* OTPCodeInputItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OTPCodeInputItem.xib; sourceTree = "<group>"; };
+		0EC5245524778D1A003E9063 /* OTPBoxViewLoading.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OTPBoxViewLoading.xib; sourceTree = "<group>"; };
+		0EC5245824779084003E9063 /* UIView+nib.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+nib.m"; sourceTree = "<group>"; };
 		0EF4B63A2472803300E5683F /* OTPBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OTPBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EF4B63D2472803300E5683F /* OTPBox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTPBox.h; sourceTree = "<group>"; };
 		0EF4B63E2472803300E5683F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -104,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				0E52845224767B580047108C /* UIColor+hex.m */,
+				0EC5245824779084003E9063 /* UIView+nib.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -152,8 +157,8 @@
 			children = (
 				0E6676D42473F10F00807CD8 /* OTPActionView.h */,
 				0E6676D52473F10F00807CD8 /* OTPActionView.m */,
-				0E6676CE2473E81700807CD8 /* OTPAction.h */,
-				0E6676CF2473E81700807CD8 /* OTPAction.m */,
+				0E6676CE2473E81700807CD8 /* OTPActionItem.h */,
+				0E6676CF2473E81700807CD8 /* OTPActionItem.m */,
 				0E5DA1D32473F490004857AE /* OTPActionSMS.xib */,
 				0E6676C82473E7C700807CD8 /* OTPActionCall.xib */,
 			);
@@ -165,9 +170,9 @@
 			children = (
 				0E7F52BE2473D63700EB8350 /* OTPInput */,
 				0E6676C72473E76000807CD8 /* OTPAction */,
-				0EF4B654247283AC00E5683F /* OTPBoxView.xib */,
 				0E7F5298247284A500EB8350 /* OTPBoxView.h */,
 				0E7F5299247284A500EB8350 /* OTPBoxView.m */,
+				0EC5245724778D20003E9063 /* nib */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -175,13 +180,22 @@
 		0E7F52BE2473D63700EB8350 /* OTPInput */ = {
 			isa = PBXGroup;
 			children = (
-				0E7F52BA2473D4C300EB8350 /* OTPInput.h */,
-				0E7F52BB2473D4C300EB8350 /* OTPInput.m */,
+				0E7F52BA2473D4C300EB8350 /* OTPInputView.h */,
+				0E7F52BB2473D4C300EB8350 /* OTPInputView.m */,
 				0E7F52BF2473D65800EB8350 /* OTPCodeInputItem.h */,
 				0E7F52C02473D65800EB8350 /* OTPCodeInputItem.m */,
 				0E7F52C32473D70300EB8350 /* OTPCodeInputItem.xib */,
 			);
 			path = OTPInput;
+			sourceTree = "<group>";
+		};
+		0EC5245724778D20003E9063 /* nib */ = {
+			isa = PBXGroup;
+			children = (
+				0EF4B654247283AC00E5683F /* OTPBoxView.xib */,
+				0EC5245524778D1A003E9063 /* OTPBoxViewLoading.xib */,
+			);
+			path = nib;
 			sourceTree = "<group>";
 		};
 		0EF4B6302472803300E5683F = {
@@ -233,10 +247,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E52845C24767EAE0047108C /* OTPManager.h in Headers */,
-				0E7F52BC2473D4C400EB8350 /* OTPInput.h in Headers */,
+				0E7F52BC2473D4C400EB8350 /* OTPInputView.h in Headers */,
 				0E6676D62473F10F00807CD8 /* OTPActionView.h in Headers */,
 				0E7F52C12473D65800EB8350 /* OTPCodeInputItem.h in Headers */,
-				0E6676D02473E81700807CD8 /* OTPAction.h in Headers */,
+				0E6676D02473E81700807CD8 /* OTPActionItem.h in Headers */,
 				0EF4B64B2472803400E5683F /* OTPBox.h in Headers */,
 				0E52845724767CFE0047108C /* APIs.h in Headers */,
 				0E7F529A247284A500EB8350 /* OTPBoxView.h in Headers */,
@@ -323,6 +337,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E7F52C42473D70300EB8350 /* OTPCodeInputItem.xib in Resources */,
+				0EC5245624778D1A003E9063 /* OTPBoxViewLoading.xib in Resources */,
 				0EF4B655247283AC00E5683F /* OTPBoxView.xib in Resources */,
 				0E5DA1DF247512D0004857AE /* Font Awesome 5 Pro-Regular-400.otf in Resources */,
 				0E6676D32473E8D600807CD8 /* Assets.xcassets in Resources */,
@@ -349,14 +364,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E7F52BD2473D4C400EB8350 /* OTPInput.m in Sources */,
+				0E7F52BD2473D4C400EB8350 /* OTPInputView.m in Sources */,
 				0E52845824767CFE0047108C /* APIs.m in Sources */,
+				0EC5245924779084003E9063 /* UIView+nib.m in Sources */,
 				0E7F52C22473D65800EB8350 /* OTPCodeInputItem.m in Sources */,
 				0E7F529B247284A500EB8350 /* OTPBoxView.m in Sources */,
 				0E52845324767B580047108C /* UIColor+hex.m in Sources */,
 				0E52845D24767EAE0047108C /* OTPManager.m in Sources */,
 				0E6676D72473F10F00807CD8 /* OTPActionView.m in Sources */,
-				0E6676D12473E81700807CD8 /* OTPAction.m in Sources */,
+				0E6676D12473E81700807CD8 /* OTPActionItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
