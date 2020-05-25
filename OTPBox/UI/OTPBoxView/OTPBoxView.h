@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <OTPBox/OTPActionDelegate.h>
 #import <OTPBox/OTPExpiredViewDelegate.h>
-
+#import <OTPBox/OTPReportViewDelegate.h>
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol OTPBoxDelegate <NSObject>
@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
-@interface OTPBoxView : UIView <UITextFieldDelegate, OTPBoxActionDelegate, OTPExpiredViewDelegate>
+@interface OTPBoxView : UIView <UITextFieldDelegate, OTPBoxActionDelegate, OTPExpiredViewDelegate, OTPReportViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *lbTitle;
 @property (weak, nonatomic) IBOutlet UIView *viewInputOTP;
 @property (weak, nonatomic) IBOutlet UIView *viewAction;

@@ -14,6 +14,7 @@
 @optional
 
 - (void)onBackTapped;
+- (void)onReportTapped;
 
 @end
 

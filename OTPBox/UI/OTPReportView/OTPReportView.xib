@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="OTPReportView" id="P1o-1O-45z" userLabel="OTPReportView" customClass="OTPReportView">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="302"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" horizontalHuggingPriority="900" verticalHuggingPriority="900" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="900" translatesAutoresizingMaskIntoConstraints="NO" id="e3l-cB-pyW">
+                    <rect key="frame" x="0.0" y="0.0" width="300" height="302"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="902" verticalHuggingPriority="902" horizontalCompressionResistancePriority="902" verticalCompressionResistancePriority="902" image="thanks" translatesAutoresizingMaskIntoConstraints="NO" id="4On-ve-74a">
+                            <rect key="frame" x="80" y="16" width="140" height="120"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="120" id="0xI-KZ-5cg"/>
+                                <constraint firstAttribute="width" constant="140" id="QBu-be-mIu"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="900" verticalHuggingPriority="900" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="900" text="Cảm ơn bạn đã gửi phản hồi !!!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lf4-KG-TYv">
+                            <rect key="frame" x="42.5" y="148" width="215.5" height="18"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
+                            <color key="textColor" red="0.2156862745" green="0.71764705880000002" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="asG-oJ-fNT" userLabel="padding">
+                            <rect key="frame" x="149.5" y="166" width="1" height="16"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="16" id="L4P-gW-hQV"/>
+                                <constraint firstAttribute="width" constant="1" id="RPX-Iy-kqG"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="899" verticalHuggingPriority="899" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="900" text="Chúng tôi sẽ tiến hành kiểm tra và chỉnh sửa nếu phát hiện có lỗi.  Quay lại sau 3s" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8BV-Xs-BqO">
+                            <rect key="frame" x="16" y="182" width="268" height="66"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                            <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="Lf4-KG-TYv" firstAttribute="top" secondItem="4On-ve-74a" secondAttribute="bottom" constant="12" id="0f4-qg-UCq"/>
+                        <constraint firstItem="cGX-Rz-FXZ" firstAttribute="bottom" secondItem="8BV-Xs-BqO" secondAttribute="bottom" constant="20" id="1GF-ys-FVA"/>
+                        <constraint firstItem="8BV-Xs-BqO" firstAttribute="leading" secondItem="cGX-Rz-FXZ" secondAttribute="leading" constant="16" id="5M2-cm-FwX"/>
+                        <constraint firstItem="Lf4-KG-TYv" firstAttribute="centerX" secondItem="e3l-cB-pyW" secondAttribute="centerX" id="FFy-hI-DSs"/>
+                        <constraint firstItem="4On-ve-74a" firstAttribute="top" secondItem="e3l-cB-pyW" secondAttribute="top" constant="16" id="IVf-ko-vsr"/>
+                        <constraint firstItem="4On-ve-74a" firstAttribute="centerX" secondItem="e3l-cB-pyW" secondAttribute="centerX" id="K4L-yt-d62"/>
+                        <constraint firstItem="8BV-Xs-BqO" firstAttribute="top" secondItem="asG-oJ-fNT" secondAttribute="bottom" id="TnU-tY-AO4"/>
+                        <constraint firstItem="asG-oJ-fNT" firstAttribute="top" secondItem="Lf4-KG-TYv" secondAttribute="bottom" id="WvX-Yd-wWI"/>
+                        <constraint firstItem="cGX-Rz-FXZ" firstAttribute="trailing" secondItem="8BV-Xs-BqO" secondAttribute="trailing" constant="16" id="cF9-tP-d1c"/>
+                        <constraint firstItem="asG-oJ-fNT" firstAttribute="height" secondItem="8BV-Xs-BqO" secondAttribute="height" priority="800" id="llJ-IY-HpI"/>
+                        <constraint firstItem="asG-oJ-fNT" firstAttribute="centerX" secondItem="e3l-cB-pyW" secondAttribute="centerX" id="pa6-o6-9C3"/>
+                        <constraint firstAttribute="width" constant="300" id="zEa-tg-Thh"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="cGX-Rz-FXZ"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="e3l-cB-pyW" secondAttribute="trailing" id="5yh-I5-HnN"/>
+                <constraint firstItem="e3l-cB-pyW" firstAttribute="leading" secondItem="P1o-1O-45z" secondAttribute="leading" id="VL4-YX-9Tk"/>
+                <constraint firstItem="e3l-cB-pyW" firstAttribute="top" secondItem="P1o-1O-45z" secondAttribute="top" id="Xnl-iU-xXC"/>
+                <constraint firstAttribute="bottom" secondItem="e3l-cB-pyW" secondAttribute="bottom" id="YPt-HD-38L"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="2yG-yD-Xi6"/>
+            <connections>
+                <outlet property="lbCountDown" destination="8BV-Xs-BqO" id="Kuf-FC-WcM"/>
+            </connections>
+            <point key="canvasLocation" x="82.608695652173921" y="77.008928571428569"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="thanks" width="133" height="112"/>
+    </resources>
+</document>

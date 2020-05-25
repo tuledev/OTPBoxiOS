@@ -13,6 +13,7 @@
 #import "../../Utils/UIView+nib.m"
 #import "../OTPActionView/OTPActionView.h"
 #import "../OTPExpiredView/OTPExpiredView.h"
+#import "../OTPReportView/OTPReportView.h"
 
 @interface OTPBoxView()
 
@@ -23,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIView *overlayView;
 @property (nonatomic, weak) UIView * initLoadingView;
 @property (nonatomic, weak) OTPExpiredView * expiredView;
+@property (nonatomic, weak) OTPReportView * reportView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraintOTPInputView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraintOTPActionView;
 @property (weak, nonatomic) IBOutlet UITextField *tfOTP;
@@ -58,11 +60,8 @@
     [otpBoxView showLoading:NO];
     [otpBoxView showError:@""];
     [otpBoxView showInitLoading];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [otpBoxView removeInitLoading];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [otpBoxView showExpiredView];
-    });
     });
 
     return otpBoxView;
@@ -79,11 +78,22 @@
     self.loading = NO;
     self.expired = NO;
     
-//    [self showInitLoading];
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [self removeInitLoading];
-//    });
-    
+    self.alpha = 0;
+    [UIView animateWithDuration:0.5 animations:^{
+        self.alpha = 1;
+    }];
+
+}
+
+- (void)removeBox {
+    self.alpha = 1;
+    [UIView animateWithDuration:0.25f animations:^{
+        self.alpha = 0;
+    } completion:^(BOOL finished) {
+        if (finished) {
+            [self removeFromSuperview];
+        }
+    }];
 }
 
 + (void)loadFontWithName:(NSString *)fontName
@@ -138,6 +148,9 @@
     __weak OTPBoxView *weakSelf = self;
     [OTPManager verifyOTP:otp callback:^(NSString * _Nonnull error) {
         if (weakSelf != nil) {
+            if ([error isEqualToString:@""]) {
+                [weakSelf removeBox];
+            }
             [weakSelf showLoading:NO];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [weakSelf showError:error];
@@ -229,9 +242,28 @@
         if (finished) {
             if (self.initLoadingView != nil) {
                 [self.otpBoxContainerView sendSubviewToBack:self.overlayView];
-                [self.initLoadingView removeFromSuperview];
+                [self.expiredView removeFromSuperview];
             }
         }
+    }];
+}
+
+- (void)showReportView {
+    if (self.reportView == nil) {
+        self.reportView = [OTPReportView loadFromNIB];
+    }
+//    [self.reportView removeFromSuperview];
+    [self.reportView layoutIfNeeded];
+    self.reportView.delegate = self;
+    self.overlayView.frame = self.reportView.frame;
+    self.heightConstraintOPTBoxView.priority = 999;
+    [self.overlayView addSubview:self.reportView];
+    [self.otpBoxContainerView bringSubviewToFront:self.overlayView];
+    self.otpInputContainerView.alpha = 0;
+    [UIView animateWithDuration:0.35f animations:^{
+        self.overlayView.alpha = 1;
+        [self setNeedsUpdateConstraints];
+        [self layoutIfNeeded];
     }];
 }
 
@@ -272,6 +304,7 @@
     }];
 }
 
+
 - (void)onCallTapped {
     [self showExpiredView];
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -286,12 +319,25 @@
     
 }
 
-- (void)onBackTapped {
-    [self removeFromSuperview];
+- (IBAction)onCloseTapped:(id)sender {
+    [self removeBox];
 }
 
-- (IBAction)onCloseTapped:(id)sender {
-    [self removeFromSuperview];
+// EXPIRED View
+
+- (void)onBackTapped {
+    [self removeBox];
+}
+
+- (void)onReportTapped {
+    [self.expiredView removeFromSuperview];
+    [self showReportView];
+}
+
+// REPORT view
+
+- (void)onDoneReportHandler {
+    [self removeBox];
 }
 
 // TEXTFIELD

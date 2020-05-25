@@ -18,7 +18,8 @@
 static NSInteger requestNumber = 0;
 
 + (void)verifyOTP:(NSString *)otp callback:(void(^)(NSString * error))callback {
-    if (requestNumber == 0) {
+//    if (requestNumber == 0) {
+    if (![otp isEqualToString:@"1111"]) {
         [APIs mockAPIsCompletionWithErrorCallback:^(NSString * _Nonnull error) {
             callback(error);
         }];

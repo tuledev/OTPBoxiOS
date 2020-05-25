@@ -23,4 +23,10 @@
     }
 }
 
+- (IBAction)onReportTapped:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(onReportTapped)]) {
+        [self.delegate onReportTapped];
+    }
+}
+
 @end
