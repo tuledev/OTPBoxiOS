@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface OTPManager : NSObject
 
 + (void)verifyOTP:(NSString *) otp callback:(void(^)(NSString * error))callback;
++ (void)requestOTP:(void(^)(NSString * error))callback;
 
 @end
 

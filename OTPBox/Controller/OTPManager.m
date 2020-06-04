@@ -32,4 +32,10 @@ static NSInteger requestNumber = 0;
     }
 }
 
++ (void)requestOTP:(void(^)(NSString * error))callback {
+    [APIs mockAPIsCompletionCallback:^(NSString * _Nonnull error) {
+        callback(error);
+    }];
+}
+
 @end
