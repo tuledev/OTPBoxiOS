@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface OTPInputPhoneView : UIView
+@interface OTPInputPhoneView : UIView <UITextFieldDelegate>
 
 - (void)setupUI: (BOOL)showMethods delegate:(id<OTPBoxActionDelegate>)delegate;
 

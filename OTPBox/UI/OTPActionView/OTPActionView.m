@@ -40,6 +40,16 @@
     smsAction.delegate = delegate;
     [self addSubview:callAction];
     [self addSubview:smsAction];
+    [self.arrAction addObject:callAction];
+    [self.arrAction addObject:smsAction];
+}
+
+- (void)disable:(BOOL)disable {
+    for (int i=0; i<self.arrAction.count; i+=1) {
+        OTPActionItem * item = (OTPActionItem *)self.arrAction[i];
+        [item disable:disable];
+    }
+    [self layoutIfNeeded];
 }
 
 + (OTPActionView *)createOTPActionsWithDelegate: (id<OTPBoxActionDelegate> _Nonnull)delegate {

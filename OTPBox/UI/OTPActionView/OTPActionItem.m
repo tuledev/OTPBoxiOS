@@ -7,8 +7,12 @@
 //
 
 #import "OTPActionItem.h"
+#import "../../Utils/UIColor+hex.m"
+
 
 @interface OTPActionItem()
+
+@property (nonatomic) BOOL isDisabled;
 @property (weak, nonatomic) IBOutlet UILabel *lbIconCall;
 @property (weak, nonatomic) IBOutlet UILabel *lbIconSMS;
 @property (weak, nonatomic) IBOutlet UIButton *btnCall;
@@ -55,18 +59,38 @@
 //    }
 }
 
+- (void)disable:(BOOL)disable {
+    self.isDisabled = disable;
+    if (disable) {
+        self.lbIconCall.textColor = [UIColor colorWithHexString:@"98a7b9"];
+        self.lbIconSMS.textColor = [UIColor colorWithHexString:@"98a7b9"];
+        [self.btnCall setEnabled:NO];
+        [self.btnSMS setEnabled:NO];
+    } else {
+        self.lbIconCall.textColor = [UIColor colorWithHexString:@"0086c9"];
+        self.lbIconSMS.textColor = [UIColor colorWithHexString:@"0086c9"];
+        [self.btnCall setEnabled:YES];
+        [self.btnSMS setEnabled:YES];
+    }
+}
+
 - (IBAction)onCallTapped:(id)sender {
+    if (self.isDisabled) return;
+
     if ([self.delegate respondsToSelector:@selector(onCallTapped)]) {
         [self.delegate onCallTapped];
     }
 }
 - (IBAction)onSMSTapped:(id)sender {
+    if (self.isDisabled) return;
+
     if ([self.delegate respondsToSelector:@selector(onSMSTapped)]) {
         [self.delegate onSMSTapped];
     }
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    if (self.isDisabled) return;
     [UIView animateWithDuration:0.1 animations:^{
         self.alpha = 0.1;
     }];

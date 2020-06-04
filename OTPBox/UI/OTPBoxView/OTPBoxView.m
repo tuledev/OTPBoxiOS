@@ -39,6 +39,7 @@
 
 @property (nonatomic) BOOL loading;
 @property (nonatomic) BOOL expired;
+@property (nonatomic) BOOL canResend;
 
 @end
 
@@ -65,6 +66,7 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //        [otpBoxView removeInitLoading];
         [otpBoxView showInputPhoneView];
+        [otpBoxView.otpAction disable:YES];
     });
 
     return otpBoxView;
@@ -159,6 +161,7 @@
     [self.widthConstraintOTPActionView setConstant:self.otpAction.frame.size.width];
     [self.viewAction addSubview:self.otpAction];
     [self.tfOTP becomeFirstResponder];
+    self.canResend = NO;
 }
 
 - (void)updateOTPCode: (NSString *)otp {
@@ -173,6 +176,7 @@
 - (void)requestVerifyOTPCode: (NSString *)otp {
     [self showLoading:YES text:@"Đang kiểm tra"];
     __weak OTPBoxView *weakSelf = self;
+    self.canResend = YES;
     [OTPManager verifyOTP:otp callback:^(NSString * _Nonnull error) {
         if (weakSelf != nil) {
             if ([error isEqualToString:@""]) {
@@ -314,6 +318,8 @@
 
 - (void)showLoading: (BOOL) loading text:(NSString *)text {
     
+    [self.otpAction disable:loading || !self.canResend];
+
     self.loading = loading;
     [UIView animateWithDuration:0.1f animations:^{
         self.lbLoading.alpha = loading ? 1 : 0;

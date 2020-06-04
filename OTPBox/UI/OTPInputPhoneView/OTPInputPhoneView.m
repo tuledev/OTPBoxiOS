@@ -9,13 +9,15 @@
 #import "OTPInputPhoneView.h"
 #import "../../Utils/UIColor+hex.m"
 #import "../OTPActionView/OTPActionItem.h"
+#import "../OTPActionView/OTPActionView.h"
+
 
 
 @interface OTPInputPhoneView()
 
-@property (nonatomic, retain) NSMutableArray * arrAction;
-
 @property (nonatomic, weak) id <OTPBoxActionDelegate> delegate;
+@property (nonatomic, retain) OTPActionView * otpAction;
+
 
 @property (weak, nonatomic) IBOutlet UIView *choosingMethodView;
 @property (weak, nonatomic) IBOutlet UIView *receiveOTPView;
@@ -39,33 +41,32 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    self.tfInputPhone.delegate = self;
 }
 
 - (void)setupUI: (BOOL)showMethods delegate:(id<OTPBoxActionDelegate>)delegate {
     self.inputView.layer.borderColor = [[UIColor colorWithHexString:@"0086c9"] CGColor];
     self.inputView.layer.borderWidth = 1;
-    
-    self.arrAction = [NSMutableArray new];
-    
+
     [[self.actionView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
-    OTPActionItem * callAction = [OTPActionItem create:0];
-    callAction.frame = CGRectMake(0, 0, 100, 20);
-    callAction.delegate = delegate;
-    OTPActionItem * smsAction = [OTPActionItem create:1];
-    smsAction.frame = CGRectMake(100 + 50, 0, 100, 20);
-    smsAction.delegate = delegate;
-    [self.actionView addSubview:callAction];
-    [self.actionView addSubview:smsAction];
     self.delegate = delegate;
-    
+    self.otpAction = [OTPActionView createOTPActionsWithDelegate:delegate];
+    [self.actionView addSubview:self.otpAction];
+    [self.otpAction disable:YES];
+
     [self.tfInputPhone becomeFirstResponder];
     if (showMethods) {
         self.heightConstraintReceiveOTPView.priority = 999;
     } else {
         self.heightConstraintActionMethodView.priority = 999;
     }
+    [self disableAction:YES];
+}
 
+- (void)disableAction:(BOOL)disable {
+    [self.otpAction disable:disable];
 }
 
 - (void)onCallTapped {
@@ -78,6 +79,23 @@
     if ([self.delegate respondsToSelector:@selector(onSMSTapped)]) {
         [self.delegate onSMSTapped];
     }
+}
+
+
+// TEXTFIELD
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+
+    NSString * updatedString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (updatedString.length >  10) {
+        return NO;
+    }
+    if (updatedString.length == 10) {
+        [self disableAction:NO];
+    } else {
+        [self disableAction:YES];
+    }
+    return YES;
 }
 
 

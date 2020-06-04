@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id <OTPBoxActionDelegate> delegate;
 + (OTPActionItem *)create: (NSInteger)type;
 
+- (void)disable:(BOOL)disable;
+
 @end
 
 NS_ASSUME_NONNULL_END
