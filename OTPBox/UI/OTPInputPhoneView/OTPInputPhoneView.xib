@@ -21,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="897" verticalHuggingPriority="897" horizontalCompressionResistancePriority="899" verticalCompressionResistancePriority="899" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kF5-M0-cOa">
-                    <rect key="frame" x="16" y="24" width="268" height="19.5"/>
+                    <rect key="frame" x="16" y="24" width="268" height="23.5"/>
                     <string key="text">Nhập số điện thoại để nhận 
 mã xác thực</string>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
@@ -29,7 +29,7 @@ mã xác thực</string>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J5b-M8-Gdh">
-                    <rect key="frame" x="24" y="63.5" width="252" height="64"/>
+                    <rect key="frame" x="24" y="67.5" width="252" height="64"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="899" verticalHuggingPriority="899" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="900" text="Số điện thoại" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cRs-qr-pmG">
                             <rect key="frame" x="16" y="10" width="71" height="14"/>
@@ -127,7 +127,7 @@ mã xác thực</string>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="FnQ-0D-dXc" firstAttribute="top" secondItem="J5b-M8-Gdh" secondAttribute="bottom" constant="28" id="2vc-1f-Hod"/>
+                <constraint firstItem="FnQ-0D-dXc" firstAttribute="top" secondItem="J5b-M8-Gdh" secondAttribute="bottom" constant="24" id="2vc-1f-Hod"/>
                 <constraint firstItem="J5b-M8-Gdh" firstAttribute="top" secondItem="kF5-M0-cOa" secondAttribute="bottom" constant="20" id="8zb-J4-d9z"/>
                 <constraint firstAttribute="trailing" secondItem="kF5-M0-cOa" secondAttribute="trailing" constant="16" id="Ceg-bs-XAT"/>
                 <constraint firstItem="kF5-M0-cOa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="24" id="Ezg-oK-5bS"/>

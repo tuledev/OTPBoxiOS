@@ -63,10 +63,34 @@
     [otpBoxView showError:@""];
     [otpBoxView showInitLoading];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [otpBoxView removeInitLoading];
+//        [otpBoxView removeInitLoading];
         [otpBoxView showInputPhoneView];
     });
 
+    return otpBoxView;
+}
+
++ (OTPBoxView *)showIn: (UIView *) superview phoneNumber:(NSString *)phone {
+    NSArray *bundle = [[NSBundle bundleWithIdentifier:@"Digipay.OTPBox"] loadNibNamed:@"OTPBoxView"
+                                                                                owner:self options:nil];
+    OTPBoxView *otpBoxView;
+    for (id object in bundle) {
+        if ([object isKindOfClass:[OTPBoxView class]]) {
+            otpBoxView = (OTPBoxView *)object;
+            break;
+        }
+    }
+    otpBoxView.frame = CGRectMake(0, 0, superview.frame.size.width, superview.frame.size.height);
+    
+    [superview addSubview:otpBoxView];
+    [otpBoxView renderWithConfig];
+    [otpBoxView showLoading:NO text:@""];
+    [otpBoxView showError:@""];
+    [otpBoxView showInitLoading];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [otpBoxView removeInitLoading];
+    });
+    
     return otpBoxView;
 }
 
@@ -225,7 +249,7 @@
 }
 
 - (void)removeInitLoading {
-//    [self removeOverlayView];
+    [self removeOverlayView];
 }
 
 - (void)showInputPhoneView {

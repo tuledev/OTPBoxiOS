@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) id <OTPBoxDelegate> delegate;
 
 + (OTPBoxView *)showIn: (UIView *) superview;
++ (OTPBoxView *)showIn: (UIView *) superview phoneNumber:(NSString *)phone;
 
 @end
 
