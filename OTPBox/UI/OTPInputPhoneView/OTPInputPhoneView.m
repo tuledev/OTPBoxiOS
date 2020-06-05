@@ -91,6 +91,9 @@
         return NO;
     }
     if (updatedString.length == 10) {
+        if ([self.delegate respondsToSelector:@selector(onInputPhoneDone:)]) {
+            [self.delegate onInputPhoneDone:updatedString];
+        }
         [self disableAction:NO];
     } else {
         [self disableAction:YES];

@@ -16,6 +16,7 @@
 @optional
 - (void)onCallTapped;
 - (void)onSMSTapped;
+- (void)onInputPhoneDone: (NSString *)phoneNumber;
 
 @end
 
