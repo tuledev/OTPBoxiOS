@@ -46,47 +46,68 @@
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="899" verticalHuggingPriority="899" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="900" text="Bấm quay lại hoặc gửi báo lỗi nếu không nhận được mã xác thực" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bfz-Im-dqc">
-                            <rect key="frame" x="16" y="161.5" width="268" height="74.5"/>
+                            <rect key="frame" x="16" y="161.5" width="268" height="50.5"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                             <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tOc-qP-k4d">
-                            <rect key="frame" x="16" y="161.5" width="268" height="74.5"/>
-                            <connections>
-                                <action selector="onReportTapped:" destination="dkU-Dc-HvZ" eventType="touchUpInside" id="Rt6-aO-oxf"/>
-                            </connections>
+                            <rect key="frame" x="16" y="161.5" width="268" height="50.5"/>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="901" verticalHuggingPriority="901" horizontalCompressionResistancePriority="901" verticalCompressionResistancePriority="901" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dV9-fe-aCX">
-                            <rect key="frame" x="95" y="252" width="110" height="40"/>
-                            <color key="backgroundColor" red="0.0" green="0.52549019610000003" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="knJ-VH-0QL">
+                            <rect key="frame" x="37" y="244" width="226" height="40"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZaV-O9-j50">
+                                    <rect key="frame" x="0.0" y="4.5" width="80" height="31"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                    <state key="normal" title="Gửi báo lỗi">
+                                        <color key="titleColor" red="0.0" green="0.52549019610000003" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="onReportTapped:" destination="dkU-Dc-HvZ" eventType="touchUpInside" id="f8c-RK-oef"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="901" verticalHuggingPriority="901" horizontalCompressionResistancePriority="901" verticalCompressionResistancePriority="901" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dV9-fe-aCX">
+                                    <rect key="frame" x="116" y="0.0" width="110" height="40"/>
+                                    <color key="backgroundColor" red="0.0" green="0.52549019610000003" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="Ibb-fZ-A6d"/>
+                                        <constraint firstAttribute="width" constant="110" id="i3H-HO-y8b"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                    <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="2"/>
+                                    <state key="normal" title="Quay lại">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="20"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="onBackTapped:" destination="dkU-Dc-HvZ" eventType="touchUpInside" id="Nwr-Te-WoH"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="40" id="Ibb-fZ-A6d"/>
-                                <constraint firstAttribute="width" constant="110" id="i3H-HO-y8b"/>
+                                <constraint firstItem="dV9-fe-aCX" firstAttribute="centerY" secondItem="knJ-VH-0QL" secondAttribute="centerY" id="39o-2T-5me"/>
+                                <constraint firstItem="ZaV-O9-j50" firstAttribute="leading" secondItem="knJ-VH-0QL" secondAttribute="leading" id="3aQ-ze-O2G"/>
+                                <constraint firstAttribute="trailing" secondItem="dV9-fe-aCX" secondAttribute="trailing" id="Cvw-Zj-Wgu"/>
+                                <constraint firstItem="dV9-fe-aCX" firstAttribute="leading" secondItem="ZaV-O9-j50" secondAttribute="trailing" constant="36" id="Fla-dg-lPb"/>
+                                <constraint firstItem="dV9-fe-aCX" firstAttribute="top" secondItem="knJ-VH-0QL" secondAttribute="top" id="MaO-sX-Xev"/>
+                                <constraint firstItem="ZaV-O9-j50" firstAttribute="centerY" secondItem="knJ-VH-0QL" secondAttribute="centerY" id="aZf-lD-lja"/>
+                                <constraint firstAttribute="bottom" secondItem="dV9-fe-aCX" secondAttribute="bottom" id="qVB-Um-csO"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                            <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="2"/>
-                            <state key="normal" title="Quay lại">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                    <integer key="value" value="20"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="onBackTapped:" destination="dkU-Dc-HvZ" eventType="touchUpInside" id="Nwr-Te-WoH"/>
-                            </connections>
-                        </button>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="dV9-fe-aCX" firstAttribute="top" secondItem="bfz-Im-dqc" secondAttribute="bottom" constant="16" id="1zB-Up-jlE"/>
-                        <constraint firstItem="dV9-fe-aCX" firstAttribute="centerX" secondItem="Oym-7F-HO8" secondAttribute="centerX" id="3GQ-PC-K2X"/>
                         <constraint firstItem="Gyq-Gu-dP4" firstAttribute="top" secondItem="Oym-7F-HO8" secondAttribute="top" constant="16" id="7ve-QK-904"/>
                         <constraint firstItem="xkX-Nv-TD5" firstAttribute="top" secondItem="ogf-X0-Olc" secondAttribute="bottom" id="98C-jA-Tlg"/>
-                        <constraint firstAttribute="bottom" secondItem="dV9-fe-aCX" secondAttribute="bottom" constant="24" id="Ae2-x8-8bY"/>
+                        <constraint firstAttribute="bottom" secondItem="knJ-VH-0QL" secondAttribute="bottom" constant="32" id="BWG-J0-xTc"/>
+                        <constraint firstItem="knJ-VH-0QL" firstAttribute="centerX" secondItem="Oym-7F-HO8" secondAttribute="centerX" id="Ddx-zJ-jIP"/>
                         <constraint firstItem="tOc-qP-k4d" firstAttribute="trailing" secondItem="bfz-Im-dqc" secondAttribute="trailing" id="Ds7-ht-qpZ"/>
                         <constraint firstItem="Gyq-Gu-dP4" firstAttribute="centerX" secondItem="Oym-7F-HO8" secondAttribute="centerX" id="Elb-tb-kwL"/>
                         <constraint firstItem="xkX-Nv-TD5" firstAttribute="height" secondItem="bfz-Im-dqc" secondAttribute="height" priority="800" id="HXI-I1-MeU"/>
@@ -97,6 +118,7 @@
                         <constraint firstAttribute="width" constant="300" id="k82-As-HXV"/>
                         <constraint firstItem="bfz-Im-dqc" firstAttribute="leading" secondItem="inH-F4-ZAv" secondAttribute="leading" constant="16" id="mkC-A2-3Uw"/>
                         <constraint firstItem="inH-F4-ZAv" firstAttribute="trailing" secondItem="bfz-Im-dqc" secondAttribute="trailing" constant="16" id="rz2-gQ-Qhx"/>
+                        <constraint firstItem="knJ-VH-0QL" firstAttribute="top" secondItem="bfz-Im-dqc" secondAttribute="bottom" constant="32" id="xAe-gW-0uO"/>
                         <constraint firstItem="bfz-Im-dqc" firstAttribute="top" secondItem="xkX-Nv-TD5" secondAttribute="bottom" id="xDo-lJ-SJ5"/>
                         <constraint firstItem="tOc-qP-k4d" firstAttribute="top" secondItem="bfz-Im-dqc" secondAttribute="top" id="yDs-1i-DQX"/>
                         <constraint firstItem="tOc-qP-k4d" firstAttribute="bottom" secondItem="bfz-Im-dqc" secondAttribute="bottom" id="yTg-Q3-hYM"/>

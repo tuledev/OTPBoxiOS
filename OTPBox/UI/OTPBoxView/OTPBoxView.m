@@ -46,6 +46,8 @@
 @property (nonatomic, retain) NSTimer * resendTimer;
 @property (nonatomic, retain) NSString * currentMethod;
 @property (nonatomic, retain) NSString * phoneNumber;
+@property (nonatomic, retain) NSTimer * expiredTimer;
+@property (nonatomic) NSInteger expiredCoundown;
 
 @end
 
@@ -164,8 +166,29 @@
 
 - (void)startSession {
     [self startResendCounter];
+    [self startExpiredCounter];
     [self requestOTPCode];
     [self renderTitle];
+}
+
+- (void)startExpiredCounter {
+    self.expiredCoundown = 5;
+    if (self.expiredTimer != nil) {
+        [self.expiredTimer invalidate];
+        self.expiredTimer = nil;
+        return;
+    }
+    self.expiredTimer = [NSTimer scheduledTimerWithTimeInterval:self.expiredCoundown
+                                                        target:self
+                                                      selector:@selector(fireExpired)
+                                                      userInfo:nil
+                                                       repeats:NO];
+}
+
+- (void)fireExpired {
+    [self showExpiredView];
+    [self.expiredTimer invalidate];
+    self.expiredTimer = nil;
 }
 
 - (void)startResendCounter {
