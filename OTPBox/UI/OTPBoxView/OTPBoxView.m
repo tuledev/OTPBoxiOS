@@ -117,7 +117,24 @@
 
 }
 
-- (void)removeBox {
+- (void)removeBoxWithSuccessResult {
+    if ([self.delegate respondsToSelector:@selector(onResultHandler:)]) {
+        [self.delegate onResultHandler:YES];
+    }
+    self.alpha = 1;
+    [UIView animateWithDuration:0.25f animations:^{
+        self.alpha = 0;
+    } completion:^(BOOL finished) {
+        if (finished) {
+            [self removeFromSuperview];
+        }
+    }];
+}
+
+- (void)removeBoxWithFailedResult {
+    if ([self.delegate respondsToSelector:@selector(onResultHandler:)]) {
+        [self.delegate onResultHandler:NO];
+    }
     self.alpha = 1;
     [UIView animateWithDuration:0.25f animations:^{
         self.alpha = 0;
@@ -266,20 +283,7 @@
     __weak OTPBoxView *weakSelf = self;
     [OTPManager verifyOTP:otp callback:^(NSString * _Nonnull error) {
         if (weakSelf != nil) {
-            if ([error isEqualToString:@""]) {
-                [weakSelf removeBox];
-            } else {
-                self.wrongOTPCount += 1;
-            }
-            [weakSelf showLoading:NO text:@""];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [weakSelf showError:error];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    if ([self checkExpired]) {
-                        return;
-                    };
-                });
-            });
+            [weakSelf handleOTPResponse:error];
         }
     }];
 }
@@ -292,6 +296,24 @@
             [weakSelf showLoading:NO text:@""];
         }
     }];
+}
+
+- (void)handleOTPResponse: (NSString *)error {
+    if ([error isEqualToString:@""]) {
+        [self removeBoxWithSuccessResult];
+        return;
+    }
+    
+    self.wrongOTPCount += 1;
+    [self showLoading:NO text:@""];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self showError:error];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if ([self checkExpired]) {
+                return;
+            };
+        });
+    });
 }
 
 // Render
@@ -536,13 +558,13 @@
 }
 
 - (IBAction)onCloseTapped:(id)sender {
-    [self removeBox];
+    [self removeBoxWithFailedResult];
 }
 
 // EXPIRED View
 
 - (void)onBackTapped {
-    [self removeBox];
+    [self removeBoxWithFailedResult];
 }
 
 - (void)onReportTapped {
@@ -553,7 +575,7 @@
 // REPORT view
 
 - (void)onDoneReportHandler {
-    [self removeBox];
+    [self removeBoxWithFailedResult];
 }
 
 // TEXTFIELD

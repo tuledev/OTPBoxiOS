@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol OTPBoxDelegate <NSObject>
 
 @optional
-- (void)okButtonTapped;
+- (void)onResultHandler:(BOOL)success;
 
 @end
 
