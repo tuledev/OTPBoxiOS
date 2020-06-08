@@ -50,6 +50,8 @@
 		0EF4B6492472803400E5683F /* OTPBoxTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF4B6482472803400E5683F /* OTPBoxTests.m */; };
 		0EF4B64B2472803400E5683F /* OTPBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 0EF4B63D2472803300E5683F /* OTPBox.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0EF4B655247283AC00E5683F /* OTPBoxView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EF4B654247283AC00E5683F /* OTPBoxView.xib */; };
+		0EFAD172248E28860003CFD3 /* OTPConfigManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0EFAD170248E28860003CFD3 /* OTPConfigManager.h */; };
+		0EFAD173248E28860003CFD3 /* OTPConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EFAD171248E28860003CFD3 /* OTPConfigManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +110,8 @@
 		0EF4B6482472803400E5683F /* OTPBoxTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTPBoxTests.m; sourceTree = "<group>"; };
 		0EF4B64A2472803400E5683F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0EF4B654247283AC00E5683F /* OTPBoxView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OTPBoxView.xib; sourceTree = "<group>"; };
+		0EFAD170248E28860003CFD3 /* OTPConfigManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTPConfigManager.h; sourceTree = "<group>"; };
+		0EFAD171248E28860003CFD3 /* OTPConfigManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTPConfigManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +167,8 @@
 			children = (
 				0E52845A24767EAE0047108C /* OTPManager.h */,
 				0E52845B24767EAE0047108C /* OTPManager.m */,
+				0EFAD170248E28860003CFD3 /* OTPConfigManager.h */,
+				0EFAD171248E28860003CFD3 /* OTPConfigManager.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -312,6 +318,7 @@
 				0E170875247BAE4C00B7D50A /* OTPReportViewDelegate.h in Headers */,
 				0E9306C82488B1270050013C /* OTPInputPhoneView.h in Headers */,
 				0E76FEA12477C6B400B0172A /* OTPExpiredView.h in Headers */,
+				0EFAD172248E28860003CFD3 /* OTPConfigManager.h in Headers */,
 				0E7F52BC2473D4C400EB8350 /* OTPInputView.h in Headers */,
 				0E6676D62473F10F00807CD8 /* OTPActionView.h in Headers */,
 				0E7F52C12473D65800EB8350 /* OTPCodeInputItem.h in Headers */,
@@ -445,6 +452,7 @@
 				0E52845324767B580047108C /* UIColor+hex.m in Sources */,
 				0E170870247B87F200B7D50A /* OTPReportView.m in Sources */,
 				0E52845D24767EAE0047108C /* OTPManager.m in Sources */,
+				0EFAD173248E28860003CFD3 /* OTPConfigManager.m in Sources */,
 				0E6676D72473F10F00807CD8 /* OTPActionView.m in Sources */,
 				0E6676D12473E81700807CD8 /* OTPActionItem.m in Sources */,
 			);

@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) id <OTPExpiredViewDelegate> delegate;
 
++ (OTPExpiredView *)createWithReport:(BOOL)canReport;
+
 @end
 
 NS_ASSUME_NONNULL_END

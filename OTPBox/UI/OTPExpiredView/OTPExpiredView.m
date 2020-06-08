@@ -8,6 +8,15 @@
 
 #import "OTPExpiredView.h"
 
+@interface OTPExpiredView()
+
+@property (weak, nonatomic) IBOutlet UIView *viewWithReport;
+@property (weak, nonatomic) IBOutlet UIView *viewWithoutReport;
+@property (weak, nonatomic) IBOutlet UIView *containerView;
+
+
+@end
+
 @implementation OTPExpiredView
 
 /*
@@ -17,6 +26,33 @@
     // Drawing code
 }
 */
+
++ (OTPExpiredView *)createWithReport:(BOOL)canReport {
+    NSArray *bundle = [[NSBundle bundleWithIdentifier:@"Digipay.OTPBox"] loadNibNamed:@"OTPBoxExpiredView"
+                                                                                    owner:self options:nil];
+    OTPExpiredView *expiredView;
+    for (id object in bundle) {
+        if ([object isKindOfClass:[OTPExpiredView class]]) {
+            expiredView = (OTPExpiredView *)object;
+            break;
+        }
+    }
+    [expiredView renderWithReport:canReport];
+    
+    return expiredView;
+}
+
+- (void)renderWithReport: (BOOL)canReport {
+    if (canReport) {
+        [self.containerView bringSubviewToFront:self.viewWithReport];
+        self.viewWithoutReport.alpha = 0;
+    } else {
+        [self.containerView bringSubviewToFront:self.viewWithoutReport];
+        self.viewWithReport.alpha = 0;
+    }
+}
+    
+
 - (IBAction)onBackTapped:(id)sender {
     if ([self.delegate respondsToSelector:@selector(onBackTapped)]) {
         [self.delegate onBackTapped];

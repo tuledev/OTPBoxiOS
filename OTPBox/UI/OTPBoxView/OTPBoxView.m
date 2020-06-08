@@ -434,16 +434,7 @@
 - (void)showExpiredView {
     self.expired = YES;
     if (self.expiredView == nil) {
-        NSArray *bundle = [[NSBundle bundleWithIdentifier:@"Digipay.OTPBox"] loadNibNamed:@"OTPBoxExpiredView"
-                                                                                    owner:self options:nil];
-        OTPExpiredView *expiredView;
-        for (id object in bundle) {
-            if ([object isKindOfClass:[OTPExpiredView class]]) {
-                expiredView = (OTPExpiredView *)object;
-                break;
-            }
-        }
-        
+        OTPExpiredView *expiredView = [OTPExpiredView createWithReport:OTPConfigManager.sharedInstance.userCanReport];
         self.expiredView = expiredView;
         self.expiredView.delegate = self;
     }

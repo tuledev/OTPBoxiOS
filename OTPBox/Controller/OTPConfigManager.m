@@ -26,7 +26,7 @@
 - (id)init {
     if (self = [super init]) {
         self.resendTimeout = 50;
-        self.sessionTimeout = 150;
+        self.sessionTimeout = 2;
         self.otpCodeLength = 4;
         self.otpWrongLimit = 3;
         self.resendLimit = 3;
@@ -34,6 +34,7 @@
         [self.visibleOTPMethod addObject:@0];
         [self.visibleOTPMethod addObject:@1];
         self.defautOTPMethod = @0;
+        self.userCanReport = NO;
     }
     return self;
 }
