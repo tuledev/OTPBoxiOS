@@ -16,6 +16,7 @@
 #import "../OTPExpiredView/OTPExpiredView.h"
 #import "../OTPReportView/OTPReportView.h"
 #import "../OTPInputPhoneView/OTPInputPhoneView.h"
+#import "../../Controller/OTPConfigManager.h"
 
 @interface OTPBoxView()
 
@@ -44,17 +45,22 @@
 @property (nonatomic) BOOL canResend;
 @property (nonatomic) NSInteger resendCoundown;
 @property (nonatomic, retain) NSTimer * resendTimer;
-@property (nonatomic, retain) NSString * currentMethod;
+@property (nonatomic, retain) NSNumber * currentMethod;
 @property (nonatomic, retain) NSString * phoneNumber;
 @property (nonatomic, retain) NSTimer * expiredTimer;
 @property (nonatomic) NSInteger expiredCoundown;
+
+@property (nonatomic) NSInteger resendCount;
+@property (nonatomic) NSInteger wrongOTPCount;
+
+@property (nonatomic) BOOL sessionStarted;
 
 @end
 
 @implementation OTPBoxView 
 @synthesize viewInputOTP;
 
-+ (OTPBoxView *)showIn: (UIView *) superview {
++ (OTPBoxView *)showIn: (UIView *)superview {
     NSArray *bundle = [[NSBundle bundleWithIdentifier:@"Digipay.OTPBox"] loadNibNamed:@"OTPBoxView"
                                                                                 owner:self options:nil];
     OTPBoxView *otpBoxView;
@@ -72,7 +78,7 @@
     return otpBoxView;
 }
 
-+ (OTPBoxView *)showIn: (UIView *) superview phoneNumber:(NSString *)phone {
++ (OTPBoxView *)showIn: (UIView *)superview phoneNumber:(NSString *)phone {
     NSArray *bundle = [[NSBundle bundleWithIdentifier:@"Digipay.OTPBox"] loadNibNamed:@"OTPBoxView"
                                                                                 owner:self options:nil];
     OTPBoxView *otpBoxView;
@@ -100,30 +106,15 @@
     self.tfOTP.delegate = self;
     self.loading = NO;
     self.expired = NO;
-    self.resendCoundown = 6;
+    self.sessionStarted = NO;
+    self.resendCount = 0;
+    self.wrongOTPCount = 0;
 
     self.alpha = 0;
     [UIView animateWithDuration:0.5 animations:^{
         self.alpha = 1;
     }];
 
-}
-
-- (void)initConfig: (NSString *)phonenumber {
-    [self renderWithConfig];
-    [self showLoading:NO text:@""];
-    [self showError:@""];
-    [self showInitLoading];
-    self.phoneNumber = phonenumber;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        if ([phonenumber isEqualToString:@""]) {
-            [self showInputPhoneView];
-            [self.otpAction disable:YES];
-        } else {
-            [self startSession];
-            [self removeInitLoading];
-        }
-    });
 }
 
 - (void)removeBox {
@@ -164,15 +155,53 @@
     }
 }
 
-- (void)startSession {
-    [self startResendCounter];
-    [self startExpiredCounter];
-    [self requestOTPCode];
-    [self renderTitle];
+// init config
+
+- (void)initConfig: (NSString *)phonenumber {
+    [self showLoading:NO text:@""];
+    [self showError:@""];
+    [self showInitLoading];
+    
+    // request config with phone or without phone
+    
+    //
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.phoneNumber = phonenumber;
+        [self renderWithConfig];
+        if ([phonenumber isEqualToString:@""]) {
+            [self showInputPhoneView];
+            [self.otpAction disable:YES];
+        } else {
+            [self startSession];
+            [self removeInitLoading];
+        }
+    });
 }
 
+// Start session
+
+- (void)startSession {
+    self.sessionStarted = YES;
+    [self startExpiredCounter];
+    [self startOTPTrySession];
+}
+
+- (void)startOTPTrySession {
+    
+    if ([self checkExpired]){
+        return;
+    };
+    self.resendCount += 1;
+
+    [self requestOTPCode];
+    [self startResendCounter];
+}
+
+// Timer
+
 - (void)startExpiredCounter {
-    self.expiredCoundown = 5;
+    self.expiredCoundown = OTPConfigManager.sharedInstance.sessionTimeout;
     if (self.expiredTimer != nil) {
         [self.expiredTimer invalidate];
         self.expiredTimer = nil;
@@ -192,10 +221,11 @@
 }
 
 - (void)startResendCounter {
-    self.resendCoundown = 6;
+    self.resendCoundown = OTPConfigManager.sharedInstance.resendTimeout;
     if (self.resendTimer != nil) {
         [self endResendCounter];
     }
+    self.canResend = NO;
     self.resendTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                         target:self
                                                       selector:@selector(fireResendCount)
@@ -213,14 +243,61 @@
     if (self.resendCoundown == 1) {
         [self endResendCounter];
         [self renderCanResendOTP];
+        self.canResend = YES;
         return;
     };
+    self.canResend = NO;
     self.resendCoundown -= 1;
     [self renderResendCountDown:[NSString stringWithFormat:@"%lds",(long)self.resendCoundown]];
 }
 
+- (BOOL)checkExpired {
+    if (self.resendCount >= OTPConfigManager.sharedInstance.resendLimit || self.wrongOTPCount >= OTPConfigManager.sharedInstance.otpWrongLimit) {
+        [self showExpiredView];
+        return YES;
+    }
+    return NO;
+}
+
+// Request
+
+- (void)requestVerifyOTPCode: (NSString *)otp {
+    [self showLoading:YES text:@"Đang kiểm tra"];
+    __weak OTPBoxView *weakSelf = self;
+    [OTPManager verifyOTP:otp callback:^(NSString * _Nonnull error) {
+        if (weakSelf != nil) {
+            if ([error isEqualToString:@""]) {
+                [weakSelf removeBox];
+            } else {
+                self.wrongOTPCount += 1;
+            }
+            [weakSelf showLoading:NO text:@""];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [weakSelf showError:error];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    if ([self checkExpired]) {
+                        return;
+                    };
+                });
+            });
+        }
+    }];
+}
+
+- (void)requestOTPCode {
+    [self showLoading:YES text:@"Đang gửi mã"];
+    __weak OTPBoxView *weakSelf = self;
+    [OTPManager requestOTP:^(NSString * _Nonnull error) {
+        if (weakSelf != nil) {
+            [weakSelf showLoading:NO text:@""];
+        }
+    }];
+}
+
+// Render
+
 - (void)renderTitle {
-    NSString *text1 = [NSString stringWithFormat:@"Nhập 4 mã xác thực được gửi bằng %@ tới số điện thoại %@", [self.currentMethod isEqualToString:@"call"] ? @"Cuộc gọi" : @"Tin nhắn", self.phoneNumber];
+    NSString *text1 = [NSString stringWithFormat:@"Nhập 4 mã xác thực được gửi bằng %@ tới số điện thoại %@", [self.currentMethod  isEqual: @0] ? @"Cuộc gọi" : @"Tin nhắn", self.phoneNumber];
     UIFont *text1Font = [UIFont fontWithName:@"HelveticaNeue" size:14];
     NSMutableAttributedString *attributedString1 =
     [[NSMutableAttributedString alloc] initWithString:text1 attributes:@{ NSFontAttributeName : text1Font, NSForegroundColorAttributeName:  [UIColor colorWithHexString:@"25253e"]}];
@@ -254,52 +331,30 @@
 }
 
 - (void)renderWithConfig {
-    self.otpInput = [OTPInputView createWithOTPLength:4];
+    // config title
+    self.currentMethod = OTPConfigManager.sharedInstance.defautOTPMethod;
+    [self renderTitle];
+
+    // otp length
+    self.otpInput = [OTPInputView createWithOTPLength:OTPConfigManager.sharedInstance.otpCodeLength];
     [self.widthConstraintOTPInputView setConstant:self.otpInput.frame.size.width];
     [self.viewInputOTP addSubview:self.otpInput];
     
-    self.otpAction = [OTPActionView createOTPActionsWithDelegate:self];
+
+    self.otpAction = [OTPActionView createOTPActionsWithDelegate:self actions:OTPConfigManager.sharedInstance.visibleOTPMethod];
     [self.widthConstraintOTPActionView setConstant:self.otpAction.frame.size.width];
     [self.viewAction addSubview:self.otpAction];
     [self.tfOTP becomeFirstResponder];
     self.canResend = NO;
-    self.currentMethod = @"call";
 }
 
 - (void)updateOTPCode: (NSString *)otp {
     [self.otpInput updateOTPString:otp];
     [self showError:@""];
     
-    if (otp.length == 4) {
+    if (otp.length == OTPConfigManager.sharedInstance.otpCodeLength) {
         [self requestVerifyOTPCode:otp];
     }
-}
-
-- (void)requestVerifyOTPCode: (NSString *)otp {
-    [self showLoading:YES text:@"Đang kiểm tra"];
-    __weak OTPBoxView *weakSelf = self;
-    self.canResend = YES;
-    [OTPManager verifyOTP:otp callback:^(NSString * _Nonnull error) {
-        if (weakSelf != nil) {
-            if ([error isEqualToString:@""]) {
-                [weakSelf removeBox];
-            }
-            [weakSelf showLoading:NO text:@""];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [weakSelf showError:error];
-            });
-        }
-    }];
-}
-
-- (void)requestOTPCode {
-    [self showLoading:YES text:@"Đang gửi mã"];
-    __weak OTPBoxView *weakSelf = self;
-    [OTPManager requestOTP:^(NSString * _Nonnull error) {
-        if (weakSelf != nil) {
-            [weakSelf showLoading:NO text:@""];
-        }
-    }];
 }
 
 - (void)showOverlayView: (UIView *)displayView {
@@ -368,7 +423,7 @@
             break;
         }
     }
-    [inputPhoneView setupUI:YES delegate:self];
+    [inputPhoneView setupUI:YES delegate:self actions:OTPConfigManager.sharedInstance.visibleOTPMethod];
     [self showOverlayView:inputPhoneView];
 }
 
@@ -458,25 +513,31 @@
     }];
 }
 
+// Events
 
 - (void)onCallTapped {
-    self.currentMethod = @"call";
+    
+    self.currentMethod = @0;
     [self removeOverlayView];
-    [self startSession];
-//    [self showExpiredView];
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [self removeExpiredView];
-//    });
-//    if ([self.delegate respondsToSelector:@selector(okButtonTapped)]) {
-//        [self.delegate okButtonTapped];
-//    }
+    [self renderTitle];
+    
+    if (self.sessionStarted) {
+        [self startOTPTrySession];
+    } else {
+        [self startSession];
+    }
 }
 
 - (void)onSMSTapped {
-    printf("SMSSSSSSSSS");
-    self.currentMethod = @"sms";
+    self.currentMethod = @1;
     [self removeOverlayView];
-    [self startSession];
+    [self renderTitle];
+    
+    if (self.sessionStarted) {
+        [self startOTPTrySession];
+    } else {
+        [self startSession];
+    }
 }
 
 - (void)onInputPhoneDone: (NSString *)phoneNumber {

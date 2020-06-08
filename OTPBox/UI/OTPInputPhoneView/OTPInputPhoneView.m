@@ -17,6 +17,7 @@
 
 @property (nonatomic, weak) id <OTPBoxActionDelegate> delegate;
 @property (nonatomic, retain) OTPActionView * otpAction;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraintActionView;
 
 
 @property (weak, nonatomic) IBOutlet UIView *choosingMethodView;
@@ -26,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraintActionMethodView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraintReceiveOTPView;
 @property (weak, nonatomic) IBOutlet UITextField *tfInputPhone;
+@property (weak, nonatomic) IBOutlet UIButton *btnRecevieCode;
 
 @end
 
@@ -45,19 +47,26 @@
     self.tfInputPhone.delegate = self;
 }
 
-- (void)setupUI: (BOOL)showMethods delegate:(id<OTPBoxActionDelegate>)delegate {
+- (void)setupUI: (BOOL)showMethods delegate:(id<OTPBoxActionDelegate>)delegate actions:(NSMutableArray <NSNumber *> *)actions {
     self.inputView.layer.borderColor = [[UIColor colorWithHexString:@"0086c9"] CGColor];
     self.inputView.layer.borderWidth = 1;
 
     [[self.actionView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
+//    if (actions.count == 2) {
+//        self.widthConstraintActionView.constant =  2* 96 + 50;
+//    } else {
+//        self.widthConstraintActionView.constant =  90;
+//    }
+//
+//
     self.delegate = delegate;
-    self.otpAction = [OTPActionView createOTPActionsWithDelegate:delegate];
+    self.otpAction = [OTPActionView createOTPActionsWithDelegate:delegate actions:actions];
     [self.actionView addSubview:self.otpAction];
     [self.otpAction disable:YES];
 
     [self.tfInputPhone becomeFirstResponder];
-    if (showMethods) {
+    if (actions.count == 2) {
         self.heightConstraintReceiveOTPView.priority = 999;
     } else {
         self.heightConstraintActionMethodView.priority = 999;
@@ -67,6 +76,7 @@
 
 - (void)disableAction:(BOOL)disable {
     [self.otpAction disable:disable];
+    self.btnRecevieCode.enabled = !disable;
 }
 
 - (void)onCallTapped {

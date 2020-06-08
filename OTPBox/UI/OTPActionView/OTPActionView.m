@@ -25,23 +25,31 @@
 }
 */
 
-- (void)updateAction: (id<OTPBoxActionDelegate> _Nonnull)delegate {
+- (void)updateAction: (id<OTPBoxActionDelegate> _Nonnull)delegate actions:(NSMutableArray <NSNumber *> *) actions{
     self.arrAction = [NSMutableArray new];
     
     [[self subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
-    self.frame = CGRectMake(0, 0, 2* 96 + 50, 20);
+    if (actions.count == 2) {
+        self.frame = CGRectMake(0, 0, 2* 96 + 50, 20);
+    } else {
+        self.frame = CGRectMake(0, 0, 96, 20);
+    }
     
-    OTPActionItem * callAction = [OTPActionItem create:0];
-    callAction.frame = CGRectMake(0, 0, 100, 20);
-    callAction.delegate = delegate;
-    OTPActionItem * smsAction = [OTPActionItem create:1];
-    smsAction.frame = CGRectMake(100 + 50, 0, 100, 20);
-    smsAction.delegate = delegate;
-    [self addSubview:callAction];
-    [self addSubview:smsAction];
-    [self.arrAction addObject:callAction];
-    [self.arrAction addObject:smsAction];
+    if ([actions containsObject:@0]) {
+        OTPActionItem * callAction = [OTPActionItem create:0];
+        callAction.frame = CGRectMake(0, 0, 100, 20);
+        callAction.delegate = delegate;
+        [self addSubview:callAction];
+        [self.arrAction addObject:callAction];
+    }
+    if ([actions containsObject:@1]) {
+        OTPActionItem * smsAction = [OTPActionItem create:1];
+        smsAction.frame = CGRectMake(100 + 50, 0, 100, 20);
+        smsAction.delegate = delegate;
+        [self addSubview:smsAction];
+        [self.arrAction addObject:smsAction];
+    }
 }
 
 - (void)disable:(BOOL)disable {
@@ -52,9 +60,10 @@
     [self layoutIfNeeded];
 }
 
-+ (OTPActionView *)createOTPActionsWithDelegate: (id<OTPBoxActionDelegate> _Nonnull)delegate {
++ (OTPActionView *)createOTPActionsWithDelegate: (id<OTPBoxActionDelegate> _Nonnull)delegate
+                                        actions:(NSMutableArray <NSNumber *> *) actions {
     OTPActionView * otpAction = [OTPActionView new];
-    [otpAction updateAction: delegate];
+    [otpAction updateAction: delegate actions:actions];
     return otpAction;
 }
 

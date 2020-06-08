@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface OTPActionView : UIView
 
-+ (OTPActionView *)createOTPActionsWithDelegate: (id<OTPBoxActionDelegate> _Nonnull)delegate;
++ (OTPActionView *)createOTPActionsWithDelegate: (id<OTPBoxActionDelegate> _Nonnull)delegate actions:(NSMutableArray <NSNumber *> *) actions;
 - (void)disable:(BOOL)disable;
 
 @end

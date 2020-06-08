@@ -76,7 +76,7 @@ mã xác thực</string>
                             <rect key="frame" x="0.0" y="37.5" width="242" height="24"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="242" id="2lu-XA-0hN"/>
+                                <constraint firstAttribute="width" priority="900" constant="242" id="2lu-XA-0hN"/>
                                 <constraint firstAttribute="height" priority="900" constant="24" id="nSO-de-bXr"/>
                             </constraints>
                         </view>
@@ -108,6 +108,7 @@ mã xác thực</string>
                                 <constraint firstAttribute="height" priority="900" constant="64" id="4XZ-be-mTt"/>
                             </constraints>
                             <state key="normal" image="ic_send"/>
+                            <state key="disabled" image="ic_send_disable"/>
                             <connections>
                                 <action selector="onSendOTPTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="0if-KY-4ES"/>
                             </connections>
@@ -144,17 +145,20 @@ mã xác thực</string>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="actionView" destination="CY6-eb-JvJ" id="YYv-nf-y2u"/>
+                <outlet property="btnRecevieCode" destination="Ss9-dc-E5u" id="AQZ-1a-0AS"/>
                 <outlet property="choosingMethodView" destination="FnQ-0D-dXc" id="O5H-ky-dSY"/>
                 <outlet property="heightConstraintActionMethodView" destination="NJ6-BG-LdW" id="fT9-1z-WS9"/>
                 <outlet property="heightConstraintReceiveOTPView" destination="0Gl-dC-Nv1" id="hBa-Yo-CnD"/>
                 <outlet property="inputView" destination="J5b-M8-Gdh" id="3fS-11-oIC"/>
                 <outlet property="receiveOTPView" destination="aku-xd-n6v" id="qaE-e6-KAM"/>
                 <outlet property="tfInputPhone" destination="dxY-Bd-M8l" id="6jw-wI-2uU"/>
+                <outlet property="widthConstraintActionView" destination="2lu-XA-0hN" id="xYh-rs-lNP"/>
             </connections>
             <point key="canvasLocation" x="55.072463768115945" y="72.65625"/>
         </view>
     </objects>
     <resources>
         <image name="ic_send" width="64" height="64"/>
+        <image name="ic_send_disable" width="64" height="64"/>
     </resources>
 </document>
