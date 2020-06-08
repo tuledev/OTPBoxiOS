@@ -26,7 +26,7 @@
 - (id)init {
     if (self = [super init]) {
         self.resendTimeout = 50;
-        self.sessionTimeout = 2;
+        self.sessionTimeout = 20;
         self.otpCodeLength = 4;
         self.otpWrongLimit = 3;
         self.resendLimit = 3;

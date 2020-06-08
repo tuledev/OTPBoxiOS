@@ -51,9 +51,6 @@
                             <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tOc-qP-k4d">
-                            <rect key="frame" x="16" y="161.5" width="268" height="50.5"/>
-                        </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="knJ-VH-0QL">
                             <rect key="frame" x="37" y="244" width="226" height="40"/>
                             <subviews>
@@ -143,12 +140,10 @@
                         <constraint firstItem="xkX-Nv-TD5" firstAttribute="top" secondItem="ogf-X0-Olc" secondAttribute="bottom" id="98C-jA-Tlg"/>
                         <constraint firstAttribute="bottom" secondItem="knJ-VH-0QL" secondAttribute="bottom" constant="32" id="BWG-J0-xTc"/>
                         <constraint firstItem="knJ-VH-0QL" firstAttribute="centerX" secondItem="Oym-7F-HO8" secondAttribute="centerX" id="Ddx-zJ-jIP"/>
-                        <constraint firstItem="tOc-qP-k4d" firstAttribute="trailing" secondItem="bfz-Im-dqc" secondAttribute="trailing" id="Ds7-ht-qpZ"/>
                         <constraint firstItem="Gyq-Gu-dP4" firstAttribute="centerX" secondItem="Oym-7F-HO8" secondAttribute="centerX" id="Elb-tb-kwL"/>
                         <constraint firstItem="xkX-Nv-TD5" firstAttribute="height" secondItem="bfz-Im-dqc" secondAttribute="height" priority="800" id="HXI-I1-MeU"/>
                         <constraint firstItem="zqL-I5-tsf" firstAttribute="trailing" secondItem="knJ-VH-0QL" secondAttribute="trailing" id="Hea-AJ-Ogl"/>
                         <constraint firstItem="ogf-X0-Olc" firstAttribute="centerX" secondItem="Oym-7F-HO8" secondAttribute="centerX" id="St0-7d-PZW"/>
-                        <constraint firstItem="tOc-qP-k4d" firstAttribute="leading" secondItem="bfz-Im-dqc" secondAttribute="leading" id="Yyg-PV-xAQ"/>
                         <constraint firstItem="xkX-Nv-TD5" firstAttribute="centerX" secondItem="Oym-7F-HO8" secondAttribute="centerX" id="ZK7-cl-Mek"/>
                         <constraint firstItem="ogf-X0-Olc" firstAttribute="top" secondItem="Gyq-Gu-dP4" secondAttribute="bottom" constant="12" id="ZwX-Xg-aqK"/>
                         <constraint firstItem="zqL-I5-tsf" firstAttribute="leading" secondItem="knJ-VH-0QL" secondAttribute="leading" id="du1-rF-4vM"/>
@@ -158,8 +153,6 @@
                         <constraint firstItem="inH-F4-ZAv" firstAttribute="trailing" secondItem="bfz-Im-dqc" secondAttribute="trailing" constant="16" id="rz2-gQ-Qhx"/>
                         <constraint firstItem="knJ-VH-0QL" firstAttribute="top" secondItem="bfz-Im-dqc" secondAttribute="bottom" constant="32" id="xAe-gW-0uO"/>
                         <constraint firstItem="bfz-Im-dqc" firstAttribute="top" secondItem="xkX-Nv-TD5" secondAttribute="bottom" id="xDo-lJ-SJ5"/>
-                        <constraint firstItem="tOc-qP-k4d" firstAttribute="top" secondItem="bfz-Im-dqc" secondAttribute="top" id="yDs-1i-DQX"/>
-                        <constraint firstItem="tOc-qP-k4d" firstAttribute="bottom" secondItem="bfz-Im-dqc" secondAttribute="bottom" id="yTg-Q3-hYM"/>
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="inH-F4-ZAv"/>
                 </view>
@@ -177,6 +170,7 @@
             <viewLayoutGuide key="safeArea" id="abq-vE-qbS"/>
             <connections>
                 <outlet property="containerView" destination="Oym-7F-HO8" id="9wo-lN-m42"/>
+                <outlet property="lbDetail" destination="bfz-Im-dqc" id="SgC-e2-kCm"/>
                 <outlet property="viewWithReport" destination="knJ-VH-0QL" id="dMv-mW-Pr3"/>
                 <outlet property="viewWithoutReport" destination="zqL-I5-tsf" id="VAg-AK-vfS"/>
             </connections>

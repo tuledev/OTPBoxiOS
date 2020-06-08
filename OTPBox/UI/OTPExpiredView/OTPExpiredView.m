@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIView *viewWithReport;
 @property (weak, nonatomic) IBOutlet UIView *viewWithoutReport;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
+@property (weak, nonatomic) IBOutlet UILabel *lbDetail;
 
 
 @end
@@ -48,6 +49,7 @@
         self.viewWithoutReport.alpha = 0;
     } else {
         [self.containerView bringSubviewToFront:self.viewWithoutReport];
+        [self.lbDetail setText:@""];
         self.viewWithReport.alpha = 0;
     }
 }
