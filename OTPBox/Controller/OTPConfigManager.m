@@ -10,6 +10,9 @@
 
 @interface OTPConfigManager()
 
+@property (nonatomic, retain) NSString * clientID;
+@property (nonatomic, retain) NSString * bunbleID;
+
 @end
 
 @implementation OTPConfigManager
@@ -35,8 +38,22 @@
         [self.visibleOTPMethod addObject:@1];
         self.defautOTPMethod = @0;
         self.userCanReport = NO;
+        
+        [self readConfigFile];
     }
     return self;
+}
+
+- (void)readConfigFile {
+    NSString * path = [[NSBundle mainBundle] pathForResource:@"OTPBox-Info" ofType:@"plist"];
+    if (path == nil) {
+        NSLog(@"Warning: OTPBox-Info.plist not found!!!");
+        return;
+    }
+    NSDictionary * configData = [[NSDictionary alloc] initWithContentsOfFile:path];
+    
+    self.clientID = [configData valueForKey:@"CLIENT_ID"];
+    self.bunbleID = [configData valueForKey:@"BUNDLE_ID"];
 }
 
 @end
