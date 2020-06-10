@@ -9,6 +9,10 @@
 #import "OTPReportView.h"
 
 @interface OTPReportView()
+@property (nonatomic, retain) NSString * title;
+@property (nonatomic, retain) NSString * detail;
+@property (nonatomic, retain) NSString * img;
+@property (weak, nonatomic) IBOutlet UILabel *lbTitle;
 @property (weak, nonatomic) IBOutlet UILabel *lbCountDown;
 @property (nonatomic) NSInteger countdown;
 @property (retain, nonatomic) NSTimer * timer;
@@ -58,7 +62,16 @@
 }
 
 - (void)updateCountDownLable: (NSInteger)countdown {
-    _lbCountDown.text = [NSString stringWithFormat:@"Chúng tôi sẽ tiến hành kiểm tra và chỉnh sửa nếu phát hiện có lỗi.\nQuay lại sau %lds",(long)countdown];
+    _lbCountDown.text = [NSString stringWithFormat:@"%@ %lds", self.detail,(long)countdown];
+}
+
+- (void)updateData: (NSDictionary *)data {
+    self.title = (NSString *)[data objectForKey:@"title"];
+    self.detail = (NSString *)[data objectForKey:@"body"];
+    self.img = (NSString *)[data objectForKey:@"img"];
+    
+    self.lbTitle.text = self.title;
+    [self startCountDown];
 }
     
 
@@ -72,7 +85,6 @@
             break;
         }
     }
-    [view startCountDown];
     return view;
 }
 

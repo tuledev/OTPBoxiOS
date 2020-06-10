@@ -128,20 +128,25 @@
     if ([self.delegate respondsToSelector:@selector(onResultHandler:)]) {
         [self.delegate onResultHandler:YES];
     }
-    self.alpha = 1;
-    [UIView animateWithDuration:0.25f animations:^{
-        self.alpha = 0;
-    } completion:^(BOOL finished) {
-        if (finished) {
-            [self removeFromSuperview];
-        }
-    }];
+    [self removeBox];
 }
 
 - (void)removeBoxWithFailedResult {
     if ([self.delegate respondsToSelector:@selector(onResultHandler:)]) {
         [self.delegate onResultHandler:NO];
     }
+    [self removeBox];
+}
+
+- (void)removeBox {
+    __weak OTPBoxView *weakSelf = self;
+    [self fetchResult:^(NSDictionary *data, NSString *error) {
+        __strong OTPBoxView *strongSelf = weakSelf;
+        if (strongSelf && [strongSelf.delegate respondsToSelector:@selector(onResultHandler:)]) {
+            NSLog(@"result data %@", data);
+            [strongSelf.delegate onResultHandler:YES];
+        }
+    }];
     self.alpha = 1;
     [UIView animateWithDuration:0.25f animations:^{
         self.alpha = 0;
@@ -187,7 +192,7 @@
     [self showInitLoading];
     
     // request config with phone or without phone
-    [OTPRequestManager getInfo:^(NSString * _Nonnull error) {
+    [OTPRequestManager fetchInfo:^(NSString * _Nonnull error) {
         NSLog(@"Error: %@", error);
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             self.phoneNumber = phonenumber;
@@ -208,10 +213,10 @@
 - (void)startSession {
     self.sessionStarted = YES;
     [self startExpiredCounter];
-    [self startOTPTrySession];
+    [self startOTPTurn];
 }
 
-- (void)startOTPTrySession {
+- (void)startOTPTurn {
     
     if ([self checkExpired]){
         return;
@@ -276,7 +281,7 @@
 }
 
 - (BOOL)checkExpired {
-    if (self.resendCount >= OTPConfigManager.sharedInstance.resendLimit || self.wrongOTPCount >= OTPConfigManager.sharedInstance.otpWrongLimit) {
+    if (self.wrongOTPCount >= OTPConfigManager.sharedInstance.otpWrongLimit) {
         [self showExpiredView];
         return YES;
     }
@@ -288,9 +293,13 @@
 - (void)requestVerifyOTPCode: (NSString *)otp {
     [self showLoading:YES text:@"Đang kiểm tra"];
     __weak OTPBoxView *weakSelf = self;
-    [OTPRequestManager verifyOTP:otp callback:^(NSString * _Nonnull error) {
+    [OTPRequestManager verifyOTP:otp phoneNumber:self.phoneNumber callback:^(NSDictionary * _Nonnull data, NSString * _Nonnull error, NSString * errorCode) {
+        if ([errorCode isEqualToString:@"session_timeout"]) {
+            [self showExpiredView];
+            return;
+        }
         if (weakSelf != nil) {
-            [weakSelf handleOTPResponse:error];
+            [weakSelf handleVerifyOTPResponse:error];
         }
     }];
 }
@@ -298,14 +307,33 @@
 - (void)requestOTPCode {
     [self showLoading:YES text:@"Đang gửi mã"];
     __weak OTPBoxView *weakSelf = self;
-    [OTPRequestManager requestOTP:^(NSString * _Nonnull error) {
+    [OTPRequestManager requestOTP:self.currentMethod phoneNumber:self.phoneNumber callback:^(NSString * _Nonnull error, NSString * errorCode) {
+        if ([errorCode isEqualToString:@"session_timeout"]) {
+            [self showExpiredView];
+            return;
+        }
         if (weakSelf != nil) {
             [weakSelf showLoading:NO text:@""];
+        }
+        if (![error isEqualToString:@""]) {
+            [weakSelf showError:error];
         }
     }];
 }
 
-- (void)handleOTPResponse: (NSString *)error {
+- (void)fetchResult: (void(^)(NSDictionary *data, NSString * error))callback {
+    [OTPRequestManager fetchResult:^(NSDictionary * _Nonnull data, NSString * _Nonnull error) {
+        callback(data, error);
+    }];
+}
+
+- (void)sendReport: (void(^)(NSDictionary *data, NSString * error))callback {
+    [OTPRequestManager sendReport:^(NSDictionary * _Nonnull data, NSString * _Nonnull error) {
+        callback(data, error);
+    }];
+}
+
+- (void)handleVerifyOTPResponse: (NSString *)error {
     if ([error isEqualToString:@""]) {
         [self removeBoxWithSuccessResult];
         return;
@@ -332,7 +360,7 @@
 - (NSDictionary *)dataForFormatter {
     return @{@"method": [self currentMethodString],
              @"phoneNumber": self.phoneNumber,
-             @"codeLength": [NSString stringWithFormat:@"%ld", OTPConfigManager.sharedInstance.otpCodeLength]
+             @"codeLength": [NSString stringWithFormat:@"%ld", (long)OTPConfigManager.sharedInstance.otpCodeLength]
              };
 }
 
@@ -472,11 +500,10 @@
     [self removeOverlayView];
 }
 
-- (void)showReportView {
+- (void)showReportView: (NSDictionary *)data {
     if (self.reportView == nil) {
         self.reportView = [OTPReportView loadFromNIB];
     }
-//    [self.reportView removeFromSuperview];
     [self.reportView layoutIfNeeded];
     self.reportView.delegate = self;
     self.overlayView.frame = self.reportView.frame;
@@ -485,6 +512,7 @@
     [self.otpBoxContainerView bringSubviewToFront:self.overlayView];
     self.otpInputContainerView.alpha = 0;
     [UIView animateWithDuration:0.35f animations:^{
+        [self.reportView updateData:data];
         self.overlayView.alpha = 1;
         [self setNeedsUpdateConstraints];
         [self layoutIfNeeded];
@@ -540,7 +568,7 @@
     [self renderTitle];
     
     if (self.sessionStarted) {
-        [self startOTPTrySession];
+        [self startOTPTurn];
     } else {
         [self startSession];
     }
@@ -552,7 +580,7 @@
     [self renderTitle];
     
     if (self.sessionStarted) {
-        [self startOTPTrySession];
+        [self startOTPTurn];
     } else {
         [self startSession];
     }
@@ -573,8 +601,12 @@
 }
 
 - (void)onReportTapped {
-    [self.expiredView removeFromSuperview];
-    [self showReportView];
+    [self showInitLoading];
+    [self sendReport:^(NSDictionary *data, NSString *error) {
+        [self removeInitLoading];
+        [self.expiredView removeFromSuperview];
+        [self showReportView: data];
+    }];
 }
 
 // REPORT view

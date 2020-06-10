@@ -83,6 +83,7 @@
             <viewLayoutGuide key="safeArea" id="2yG-yD-Xi6"/>
             <connections>
                 <outlet property="lbCountDown" destination="8BV-Xs-BqO" id="Kuf-FC-WcM"/>
+                <outlet property="lbTitle" destination="Lf4-KG-TYv" id="lBc-3o-8IV"/>
             </connections>
             <point key="canvasLocation" x="82.608695652173921" y="77.008928571428569"/>
         </view>

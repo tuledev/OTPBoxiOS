@@ -11,9 +11,13 @@
 
 @interface APIs()
 
+@property (nonatomic, retain) NSString * sessionID;
+
 @end
 
 @implementation APIs
+
+static NSString * BASE_URL = @"https://box.otpbox.vn/api/v1/frontend";
 
 + (APIs *)sharedInstance {
     static APIs * sharedInstance = nil;
@@ -37,15 +41,21 @@
     });
 }
 
+- (instancetype)init {
+    if (self = [super init]) {
+        self.sessionID = @"";
+    }
+    return self;
+}
+
 - (void)getInfo: (void(^)(NSDictionary *data, NSError * error))callback {
-    // making a POST request to /init
-    NSString *targetUrl = @"https://box.otpbox.vn/api/v1/frontend/getInfo";
-    NSURL * url = [NSURL URLWithString:targetUrl];
+    self.sessionID = @"";
+    
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_URL, @"/getInfo"]];
+    
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     
-    //Make an NSDictionary that would be converted to an NSData object sent over as JSON with the request body
     NSDictionary *data = @{@"secretKey": OTPConfigManager.sharedInstance.getClientID};
-    NSLog(@"request data %@", data);
     NSError *error;
     NSData *postData = [NSJSONSerialization dataWithJSONObject:data options:0 error:&error];
     
@@ -58,14 +68,138 @@
       ^(NSData * _Nullable data,
         NSURLResponse * _Nullable response,
         NSError * _Nullable error) {
-          NSLog(@"%@",error);
           if (error == nil) {
               NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error ];
-              if ([[json objectForKey:@"status"] boolValue]) {
-                  callback([json objectForKey:@"data"], error);
-              } else {
-                  callback(nil, error);
+              callback(json, nil);
+              NSDictionary * dataDict = (NSDictionary *)[json objectForKey:@"data"];
+              if ([dataDict objectForKey:@"sessID"] != nil) {
+                  self.sessionID = (NSString *)[dataDict objectForKey:@"sessID"];
               }
+          } else {
+            callback(nil , error);
+          }
+      }] resume];
+}
+
+- (void)processWithMethod:(NSString *)method
+              phoneNumber:(NSString *)phone
+                 callback:(void(^)(NSDictionary *data, NSError * error))callback {
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_URL, @"/process"]];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    
+    NSDictionary *data = @{
+                           @"method": method,
+                           @"phone": phone,
+                           @"sessID": self.sessionID
+                           };
+    NSLog(@"process params %@", data);
+    NSError *error;
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:data options:0 error:&error];
+    
+    [request setHTTPBody:postData];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setURL:url];
+    
+    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:
+      ^(NSData * _Nullable data,
+        NSURLResponse * _Nullable response,
+        NSError * _Nullable error) {
+          if (error == nil) {
+              NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error ];
+              callback(json, nil);
+          } else {
+              callback(nil , error);
+          }
+      }] resume];
+}
+
+- (void)validateWithCode:(NSString *)code
+             phoneNumber:(NSString *)phone
+                callback:(void(^)(NSDictionary *data, NSError * error))callback {
+    
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_URL, @"/validating"]];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    
+    NSDictionary *data = @{
+                           @"code": code,
+                           @"phone": phone,
+                           @"sessID": self.sessionID
+                           };
+    NSLog(@"process params %@", data);
+    NSError *error;
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:data options:0 error:&error];
+    
+    [request setHTTPBody:postData];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setURL:url];
+    
+    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:
+      ^(NSData * _Nullable data,
+        NSURLResponse * _Nullable response,
+        NSError * _Nullable error) {
+          if (error == nil) {
+              NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error ];
+              callback(json, nil);
+          } else {
+              callback(nil , error);
+          }
+      }] resume];
+}
+
+- (void)overtime: (void(^)(NSDictionary *data, NSError * error))callback {
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_URL, @"/overtime"]];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    
+    NSDictionary *data = @{@"sessID": self.sessionID};
+    NSError *error;
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:data options:0 error:&error];
+    
+    [request setHTTPBody:postData];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setURL:url];
+
+    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:
+      ^(NSData * _Nullable data,
+        NSURLResponse * _Nullable response,
+        NSError * _Nullable error) {
+          if (error == nil) {
+              NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error ];
+              callback(json, nil);
+          } else {
+              callback(nil , error);
+          }
+      }] resume];
+}
+
+- (void)report: (void(^)(NSDictionary *data, NSError * error))callback {
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_URL, @"/report"]];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    
+    NSDictionary *data = @{@"sessID": self.sessionID};
+    NSError *error;
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:data options:0 error:&error];
+    
+    [request setHTTPBody:postData];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setURL:url];
+    
+    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:
+      ^(NSData * _Nullable data,
+        NSURLResponse * _Nullable response,
+        NSError * _Nullable error) {
+          if (error == nil) {
+              NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error ];
+              callback(json, nil);
+          } else {
+              callback(nil , error);
           }
       }] resume];
 }

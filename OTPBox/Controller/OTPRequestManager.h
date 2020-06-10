@@ -12,10 +12,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface OTPRequestManager : NSObject
 
-+ (void)verifyOTP:(NSString *) otp callback:(void(^)(NSString * error))callback;
-+ (void)requestOTP:(void(^)(NSString * error))callback;
++ (void)fetchInfo: (void(^)(NSString * error))callback;
++ (void)requestOTP:(NSNumber *)method
+       phoneNumber:(NSString *)phone
+          callback:(void(^)(NSString * error, NSString * errorCode))callback;
++ (void)verifyOTP:(NSString *)code
+      phoneNumber:(NSString *)phone
+         callback:(void(^)(NSDictionary * data, NSString * error, NSString * errorCode))callback;
 
-+(void)getInfo: (void(^)(NSString * error))callback;
++ (void)fetchResult:(void(^)(NSDictionary *data, NSString * error))callback;
++ (void)sendReport:(void(^)(NSDictionary *data, NSString * error))callback;
 
 @end
 

@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id <OTPReportViewDelegate> delegate;
 
 + (OTPReportView *)loadFromNIB;
+
+- (void)updateData: (NSDictionary *)data;
     
 @end
 
