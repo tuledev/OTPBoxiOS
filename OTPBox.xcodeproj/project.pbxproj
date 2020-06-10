@@ -16,8 +16,8 @@
 		0E52845324767B580047108C /* UIColor+hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E52845224767B580047108C /* UIColor+hex.m */; };
 		0E52845724767CFE0047108C /* APIs.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E52845524767CFE0047108C /* APIs.h */; };
 		0E52845824767CFE0047108C /* APIs.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E52845624767CFE0047108C /* APIs.m */; };
-		0E52845C24767EAE0047108C /* OTPManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E52845A24767EAE0047108C /* OTPManager.h */; };
-		0E52845D24767EAE0047108C /* OTPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E52845B24767EAE0047108C /* OTPManager.m */; };
+		0E52845C24767EAE0047108C /* OTPRequestManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E52845A24767EAE0047108C /* OTPRequestManager.h */; };
+		0E52845D24767EAE0047108C /* OTPRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E52845B24767EAE0047108C /* OTPRequestManager.m */; };
 		0E5DA1D42473F490004857AE /* OTPActionSMS.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E5DA1D32473F490004857AE /* OTPActionSMS.xib */; };
 		0E5DA1DE247512D0004857AE /* Font Awesome 5 Pro-Light-300.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0E5DA1D9247512D0004857AE /* Font Awesome 5 Pro-Light-300.otf */; };
 		0E5DA1DF247512D0004857AE /* Font Awesome 5 Pro-Regular-400.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0E5DA1DA247512D0004857AE /* Font Awesome 5 Pro-Regular-400.otf */; };
@@ -33,6 +33,10 @@
 		0E76FE9D2477C63F00B0172A /* OTPBoxExpiredView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E76FE9C2477C63F00B0172A /* OTPBoxExpiredView.xib */; };
 		0E76FEA12477C6B400B0172A /* OTPExpiredView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E76FE9F2477C6B400B0172A /* OTPExpiredView.h */; };
 		0E76FEA22477C6B400B0172A /* OTPExpiredView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E76FEA02477C6B400B0172A /* OTPExpiredView.m */; };
+		0E7C91B5248FA57C00D479AD /* UILabel+Boldify.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C91B4248FA57C00D479AD /* UILabel+Boldify.m */; };
+		0E7C91BA2490998A00D479AD /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C91B92490998A00D479AD /* Constants.m */; };
+		0E7C91BE24909DC600D479AD /* Formatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E7C91BC24909DC600D479AD /* Formatter.h */; };
+		0E7C91BF24909DC600D479AD /* Formatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C91BD24909DC600D479AD /* Formatter.m */; };
 		0E7F529A247284A500EB8350 /* OTPBoxView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E7F5298247284A500EB8350 /* OTPBoxView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0E7F529B247284A500EB8350 /* OTPBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7F5299247284A500EB8350 /* OTPBoxView.m */; };
 		0E7F52BC2473D4C400EB8350 /* OTPInputView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E7F52BA2473D4C300EB8350 /* OTPInputView.h */; };
@@ -74,8 +78,8 @@
 		0E52845224767B580047108C /* UIColor+hex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+hex.m"; sourceTree = "<group>"; };
 		0E52845524767CFE0047108C /* APIs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIs.h; sourceTree = "<group>"; };
 		0E52845624767CFE0047108C /* APIs.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APIs.m; sourceTree = "<group>"; };
-		0E52845A24767EAE0047108C /* OTPManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTPManager.h; sourceTree = "<group>"; };
-		0E52845B24767EAE0047108C /* OTPManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTPManager.m; sourceTree = "<group>"; };
+		0E52845A24767EAE0047108C /* OTPRequestManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTPRequestManager.h; sourceTree = "<group>"; };
+		0E52845B24767EAE0047108C /* OTPRequestManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTPRequestManager.m; sourceTree = "<group>"; };
 		0E5DA1D32473F490004857AE /* OTPActionSMS.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OTPActionSMS.xib; sourceTree = "<group>"; };
 		0E5DA1D9247512D0004857AE /* Font Awesome 5 Pro-Light-300.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Font Awesome 5 Pro-Light-300.otf"; sourceTree = "<group>"; };
 		0E5DA1DA247512D0004857AE /* Font Awesome 5 Pro-Regular-400.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Font Awesome 5 Pro-Regular-400.otf"; sourceTree = "<group>"; };
@@ -91,6 +95,10 @@
 		0E76FE9C2477C63F00B0172A /* OTPBoxExpiredView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OTPBoxExpiredView.xib; sourceTree = "<group>"; };
 		0E76FE9F2477C6B400B0172A /* OTPExpiredView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTPExpiredView.h; sourceTree = "<group>"; };
 		0E76FEA02477C6B400B0172A /* OTPExpiredView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTPExpiredView.m; sourceTree = "<group>"; };
+		0E7C91B4248FA57C00D479AD /* UILabel+Boldify.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Boldify.m"; sourceTree = "<group>"; };
+		0E7C91B92490998A00D479AD /* Constants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		0E7C91BC24909DC600D479AD /* Formatter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Formatter.h; sourceTree = "<group>"; };
+		0E7C91BD24909DC600D479AD /* Formatter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Formatter.m; sourceTree = "<group>"; };
 		0E7F5298247284A500EB8350 /* OTPBoxView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTPBoxView.h; sourceTree = "<group>"; };
 		0E7F5299247284A500EB8350 /* OTPBoxView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTPBoxView.m; sourceTree = "<group>"; };
 		0E7F52BA2473D4C300EB8350 /* OTPInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTPInputView.h; sourceTree = "<group>"; };
@@ -149,6 +157,9 @@
 			children = (
 				0E52845224767B580047108C /* UIColor+hex.m */,
 				0EC5245824779084003E9063 /* UIView+nib.m */,
+				0E7C91B4248FA57C00D479AD /* UILabel+Boldify.m */,
+				0E7C91BC24909DC600D479AD /* Formatter.h */,
+				0E7C91BD24909DC600D479AD /* Formatter.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -165,8 +176,8 @@
 		0E52845924767E880047108C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				0E52845A24767EAE0047108C /* OTPManager.h */,
-				0E52845B24767EAE0047108C /* OTPManager.m */,
+				0E52845A24767EAE0047108C /* OTPRequestManager.h */,
+				0E52845B24767EAE0047108C /* OTPRequestManager.m */,
 				0EFAD170248E28860003CFD3 /* OTPConfigManager.h */,
 				0EFAD171248E28860003CFD3 /* OTPConfigManager.m */,
 			);
@@ -217,6 +228,14 @@
 				0EC5245524778D1A003E9063 /* OTPBoxViewLoading.xib */,
 			);
 			path = OTPBoxView;
+			sourceTree = "<group>";
+		};
+		0E7C91B82490997600D479AD /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				0E7C91B92490998A00D479AD /* Constants.m */,
+			);
+			path = Style;
 			sourceTree = "<group>";
 		};
 		0E7F52972472848400EB8350 /* UI */ = {
@@ -287,6 +306,7 @@
 		0EF4B63C2472803300E5683F /* OTPBox */ = {
 			isa = PBXGroup;
 			children = (
+				0E7C91B82490997600D479AD /* Style */,
 				0E52845924767E880047108C /* Controller */,
 				0E52845424767CE40047108C /* Backend */,
 				0E52845124767B2B0047108C /* Utils */,
@@ -313,11 +333,12 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E52845C24767EAE0047108C /* OTPManager.h in Headers */,
+				0E52845C24767EAE0047108C /* OTPRequestManager.h in Headers */,
 				0E4A81922477D2BA003CA0A3 /* OTPActionDelegate.h in Headers */,
 				0E170875247BAE4C00B7D50A /* OTPReportViewDelegate.h in Headers */,
 				0E9306C82488B1270050013C /* OTPInputPhoneView.h in Headers */,
 				0E76FEA12477C6B400B0172A /* OTPExpiredView.h in Headers */,
+				0E7C91BE24909DC600D479AD /* Formatter.h in Headers */,
 				0EFAD172248E28860003CFD3 /* OTPConfigManager.h in Headers */,
 				0E7F52BC2473D4C400EB8350 /* OTPInputView.h in Headers */,
 				0E6676D62473F10F00807CD8 /* OTPActionView.h in Headers */,
@@ -442,16 +463,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E7F52BD2473D4C400EB8350 /* OTPInputView.m in Sources */,
+				0E7C91BA2490998A00D479AD /* Constants.m in Sources */,
 				0E9306C92488B1270050013C /* OTPInputPhoneView.m in Sources */,
 				0E52845824767CFE0047108C /* APIs.m in Sources */,
 				0E76FEA22477C6B400B0172A /* OTPExpiredView.m in Sources */,
 				0E170874247BAD8700B7D50A /* OTPReportViewDelegate.h in Sources */,
 				0EC5245924779084003E9063 /* UIView+nib.m in Sources */,
 				0E7F52C22473D65800EB8350 /* OTPCodeInputItem.m in Sources */,
+				0E7C91B5248FA57C00D479AD /* UILabel+Boldify.m in Sources */,
 				0E7F529B247284A500EB8350 /* OTPBoxView.m in Sources */,
+				0E7C91BF24909DC600D479AD /* Formatter.m in Sources */,
 				0E52845324767B580047108C /* UIColor+hex.m in Sources */,
 				0E170870247B87F200B7D50A /* OTPReportView.m in Sources */,
-				0E52845D24767EAE0047108C /* OTPManager.m in Sources */,
+				0E52845D24767EAE0047108C /* OTPRequestManager.m in Sources */,
 				0EFAD173248E28860003CFD3 /* OTPConfigManager.m in Sources */,
 				0E6676D72473F10F00807CD8 /* OTPActionView.m in Sources */,
 				0E6676D12473E81700807CD8 /* OTPActionItem.m in Sources */,

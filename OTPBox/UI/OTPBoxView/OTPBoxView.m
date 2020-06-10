@@ -9,7 +9,7 @@
 #import <CoreText/CoreText.h>
 #import "OTPBoxView.h"
 #import "../OTPInputView/OTPInputView.h"
-#import "../../Controller/OTPManager.h"
+#import "../../Controller/OTPRequestManager.h"
 #import "../../Utils/UIView+nib.m"
 #import "../../Utils/UIColor+hex.m"
 #import "../OTPActionView/OTPActionView.h"
@@ -17,13 +17,19 @@
 #import "../OTPReportView/OTPReportView.h"
 #import "../OTPInputPhoneView/OTPInputPhoneView.h"
 #import "../../Controller/OTPConfigManager.h"
+#import "../../Utils/UILabel+Boldify.m"
+#import "../../Style/Constants.m"
+#import "../../Utils/Formatter.h"
 
 @interface OTPBoxView()
 
+@property (weak, nonatomic) IBOutlet UILabel *lbTitle;
+@property (weak, nonatomic) IBOutlet UIView *viewInputOTP;
+@property (weak, nonatomic) IBOutlet UIView *viewAction;
+
 @property (nonatomic, retain) OTPInputView * otpInput;
 @property (nonatomic, retain) OTPActionView * otpAction;
-@property (weak, nonatomic) IBOutlet UIView *otpInputContainerView;
-@property (weak, nonatomic) IBOutlet UIView *otpBoxContainerView;
+@property (weak, nonatomic) IBOutlet UIView *otpInputContainerView; @property (weak, nonatomic) IBOutlet UIView *otpBoxContainerView;
 @property (weak, nonatomic) IBOutlet UIView *overlayView;
 @property (nonatomic, weak) UIView * initLoadingView;
 @property (nonatomic, weak) OTPExpiredView * expiredView;
@@ -33,6 +39,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraintOTPActionView;
 @property (weak, nonatomic) IBOutlet UITextField *tfOTP;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraintOPTBoxView;
+
 
 @property (nonatomic, retain) NSString * otpString;
 @property (weak, nonatomic) IBOutlet UILabel *lbError;
@@ -180,20 +187,20 @@
     [self showInitLoading];
     
     // request config with phone or without phone
-    
-    //
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.phoneNumber = phonenumber;
-        [self renderWithConfig];
-        if ([phonenumber isEqualToString:@""]) {
-            [self showInputPhoneView];
-            [self.otpAction disable:YES];
-        } else {
-            [self startSession];
-            [self removeInitLoading];
-        }
-    });
+    [OTPRequestManager getInfo:^(NSString * _Nonnull error) {
+        NSLog(@"Error: %@", error);
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            self.phoneNumber = phonenumber;
+            [self renderWithConfig];
+            if ([phonenumber isEqualToString:@""]) {
+                [self showInputPhoneView];
+                [self.otpAction disable:YES];
+            } else {
+                [self startSession];
+                [self removeInitLoading];
+            }
+        });
+    }];
 }
 
 // Start session
@@ -281,7 +288,7 @@
 - (void)requestVerifyOTPCode: (NSString *)otp {
     [self showLoading:YES text:@"Đang kiểm tra"];
     __weak OTPBoxView *weakSelf = self;
-    [OTPManager verifyOTP:otp callback:^(NSString * _Nonnull error) {
+    [OTPRequestManager verifyOTP:otp callback:^(NSString * _Nonnull error) {
         if (weakSelf != nil) {
             [weakSelf handleOTPResponse:error];
         }
@@ -291,7 +298,7 @@
 - (void)requestOTPCode {
     [self showLoading:YES text:@"Đang gửi mã"];
     __weak OTPBoxView *weakSelf = self;
-    [OTPManager requestOTP:^(NSString * _Nonnull error) {
+    [OTPRequestManager requestOTP:^(NSString * _Nonnull error) {
         if (weakSelf != nil) {
             [weakSelf showLoading:NO text:@""];
         }
@@ -318,38 +325,36 @@
 
 // Render
 
+- (NSString *)currentMethodString {
+    return [self.currentMethod  isEqual: @0] ? @"Cuộc gọi" : @"Tin nhắn";
+}
+
+- (NSDictionary *)dataForFormatter {
+    return @{@"method": [self currentMethodString],
+             @"phoneNumber": self.phoneNumber,
+             @"codeLength": [NSString stringWithFormat:@"%ld", OTPConfigManager.sharedInstance.otpCodeLength]
+             };
+}
+
 - (void)renderTitle {
-    NSString *text1 = [NSString stringWithFormat:@"Nhập 4 mã xác thực được gửi bằng %@ tới số điện thoại %@", [self.currentMethod  isEqual: @0] ? @"Cuộc gọi" : @"Tin nhắn", self.phoneNumber];
-    UIFont *text1Font = [UIFont fontWithName:@"HelveticaNeue" size:14];
-    NSMutableAttributedString *attributedString1 =
-    [[NSMutableAttributedString alloc] initWithString:text1 attributes:@{ NSFontAttributeName : text1Font, NSForegroundColorAttributeName:  [UIColor colorWithHexString:@"25253e"]}];
-    
-    self.lbTitle.attributedText = attributedString1;
+    self.lbTitle.attributedText = [Formatter formatText:OTPConfigManager.sharedInstance.title
+                                                   data:[self dataForFormatter]];
+    [self.lbTitle boldSubstring:[self currentMethodString]];
+    [self.lbTitle boldSubstring: self.phoneNumber];
 }
 
 - (void)renderCanResendOTP {
-    NSString *text1 = @"Nếu không nhận được mã xác thực, bấm gửi lại qua";
-    UIFont *text1Font = [UIFont fontWithName:@"HelveticaNeue" size:14];
-    NSMutableAttributedString *attributedString1 =
-    [[NSMutableAttributedString alloc] initWithString:text1 attributes:@{ NSFontAttributeName : text1Font, NSForegroundColorAttributeName:  [UIColor colorWithHexString:@"25253e88"]}];
-    
-    self.lbResendOTP.attributedText = attributedString1;
+    self.lbResendOTP.attributedText = [Formatter formatText:OTPConfigManager.sharedInstance.resendByText
+                                                       data:[self dataForFormatter]];
     [self.otpAction disable:NO];
 }
 
 - (void)renderResendCountDown: (NSString *)second {
-    NSString *text1 = @"Nếu không nhận được mã xác thực, bấm gửi lại sau ";
-    UIFont *text1Font = [UIFont fontWithName:@"HelveticaNeue" size:14];
-    NSMutableAttributedString *attributedString1 =
-    [[NSMutableAttributedString alloc] initWithString:text1 attributes:@{ NSFontAttributeName : text1Font, NSForegroundColorAttributeName:  [UIColor colorWithHexString:@"25253e88"]}];
-
-    NSString *text2 = second;
-    UIFont *text2Font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
-    NSMutableAttributedString *attributedString2 =
-    [[NSMutableAttributedString alloc] initWithString:text2 attributes:@{ NSFontAttributeName : text2Font, NSForegroundColorAttributeName:  [UIColor colorWithHexString:@"000"]}];
-    [attributedString1 appendAttributedString:attributedString2];
-    
-    self.lbResendOTP.attributedText = attributedString1;
+    NSMutableDictionary * formatterData = [NSMutableDictionary dictionaryWithDictionary:[self dataForFormatter]];
+    [formatterData setValue:second forKey:@"timeRetry"];
+    self.lbResendOTP.attributedText = [Formatter formatText:OTPConfigManager.sharedInstance.resendText
+                                                       data:formatterData];
+    [self.lbResendOTP boldSubstring:second];
 }
 
 - (void)renderWithConfig {
@@ -456,7 +461,7 @@
 - (void)showExpiredView {
     self.expired = YES;
     if (self.expiredView == nil) {
-        OTPExpiredView *expiredView = [OTPExpiredView createWithReport:OTPConfigManager.sharedInstance.userCanReport];
+        OTPExpiredView *expiredView = [OTPExpiredView createWithReport:OTPConfigManager.sharedInstance.canUserReport];
         self.expiredView = expiredView;
         self.expiredView.delegate = self;
     }
@@ -591,7 +596,7 @@
         [self updateOTPCode:otpString];
         return YES;
     }
-    if (textField.text != nil && textField.text.length ==  4) {
+    if (textField.text != nil && textField.text.length ==  OTPConfigManager.sharedInstance.otpCodeLength) {
         return NO;
     }
     NSString * otpString = [textField.text stringByAppendingString:string];

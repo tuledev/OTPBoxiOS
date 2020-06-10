@@ -21,9 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @interface OTPBoxView : UIView <UITextFieldDelegate, OTPBoxActionDelegate, OTPExpiredViewDelegate, OTPReportViewDelegate>
-@property (weak, nonatomic) IBOutlet UILabel *lbTitle;
-@property (weak, nonatomic) IBOutlet UIView *viewInputOTP;
-@property (weak, nonatomic) IBOutlet UIView *viewAction;
 
 @property (nonatomic, assign) id <OTPBoxDelegate> delegate;
 

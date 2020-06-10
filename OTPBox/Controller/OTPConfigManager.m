@@ -37,14 +37,14 @@
         [self.visibleOTPMethod addObject:@0];
         [self.visibleOTPMethod addObject:@1];
         self.defautOTPMethod = @0;
-        self.userCanReport = NO;
+        self.canUserReport = NO;
         
-        [self readConfigFile];
+        [self readInfoFile];
     }
     return self;
 }
 
-- (void)readConfigFile {
+- (void)readInfoFile {
     NSString * path = [[NSBundle mainBundle] pathForResource:@"OTPBox-Info" ofType:@"plist"];
     if (path == nil) {
         NSLog(@"Warning: OTPBox-Info.plist not found!!!");
@@ -54,6 +54,38 @@
     
     self.clientID = [configData valueForKey:@"CLIENT_ID"];
     self.bunbleID = [configData valueForKey:@"BUNDLE_ID"];
+}
+
+- (void)updateOTPConfigForDefautOTPMethod:(NSNumber *)defautOTPMethod
+                         visibleOTPMethod:(NSMutableArray <NSNumber *> *) visibleOTPMethod
+                                    title:(NSString *) title
+                              timeoutText:(NSString *)timeoutText
+                            otpCodeLength:(NSInteger)otpCodeLength
+                            otpWrongLimit:(NSInteger)otpWrongLimit
+                               resendText:(NSString *)resendText
+                               resendByText:(NSString *)resendByText
+                            resendTimeout:(NSInteger)resendTimeout
+                              resendLimit:(NSInteger)resendLimit
+                           sessionTimeout:(NSInteger)sessionTimeout
+                               reportText:(NSString *)reportText
+                            userCanReport:(BOOL)canUserReport {
+    self.defautOTPMethod = defautOTPMethod;
+    self.visibleOTPMethod = visibleOTPMethod;
+    self.title = title;
+    self.timeoutText = timeoutText;
+    self.otpCodeLength = otpCodeLength;
+    self.otpWrongLimit = otpWrongLimit;
+    self.resendText = resendText;
+    self.resendByText = resendByText;
+    self.resendTimeout = 3;//resendTimeout;
+    self.sessionTimeout = sessionTimeout;
+    self.resendLimit = resendLimit;
+    self.reportText = reportText;
+    self.canUserReport = canUserReport;
+}
+
+- (NSString *)getClientID {
+    return self.clientID;
 }
 
 @end

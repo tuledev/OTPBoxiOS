@@ -42,7 +42,7 @@
                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nhập 4 mã xác thực được gửi bằng Tin nhắn tới số điện thoại xxx 7124 " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CfQ-4U-pqk" userLabel="title">
-                                    <rect key="frame" x="28" y="16" width="244" height="33"/>
+                                    <rect key="frame" x="24" y="16" width="252" height="33"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
@@ -64,7 +64,7 @@
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="253" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ldt-1c-MgC" userLabel="error">
-                                    <rect key="frame" x="28" y="105" width="244" height="0.0"/>
+                                    <rect key="frame" x="24" y="105" width="252" height="0.0"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                     <color key="textColor" red="0.73725490196078436" green="0.058823529411764705" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -102,7 +102,7 @@
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="253" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LRJ-4W-TQh" userLabel="note">
-                                    <rect key="frame" x="28" y="177" width="244" height="33"/>
+                                    <rect key="frame" x="24" y="177" width="252" height="33"/>
                                     <string key="text">Nếu không nhận được mã xác thực,
 bấm gửi lại qua</string>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
@@ -130,7 +130,7 @@ bấm gửi lại qua</string>
                                 <constraint firstItem="LRJ-4W-TQh" firstAttribute="top" secondItem="v88-W7-ICQ" secondAttribute="bottom" constant="32" id="ICr-jk-lN8"/>
                                 <constraint firstItem="r5D-BV-GbV" firstAttribute="height" secondItem="v88-W7-ICQ" secondAttribute="height" priority="900" id="Ksn-c5-bps"/>
                                 <constraint firstItem="LRJ-4W-TQh" firstAttribute="trailing" secondItem="CfQ-4U-pqk" secondAttribute="trailing" id="Kwp-2d-y7v"/>
-                                <constraint firstAttribute="trailing" secondItem="CfQ-4U-pqk" secondAttribute="trailing" constant="28" id="MBz-qW-6vC"/>
+                                <constraint firstAttribute="trailing" secondItem="CfQ-4U-pqk" secondAttribute="trailing" constant="24" id="MBz-qW-6vC"/>
                                 <constraint firstItem="leq-WD-bSd" firstAttribute="centerX" secondItem="aNX-Xj-u7E" secondAttribute="centerX" id="W1I-1Y-mk8"/>
                                 <constraint firstItem="ldt-1c-MgC" firstAttribute="top" secondItem="9gJ-2i-gqt" secondAttribute="bottom" id="W3q-nX-Ukx"/>
                                 <constraint firstItem="CfQ-4U-pqk" firstAttribute="top" secondItem="fsu-jz-l5k" secondAttribute="top" constant="16" id="ZAB-od-m9U"/>
@@ -138,7 +138,7 @@ bấm gửi lại qua</string>
                                 <constraint firstItem="ldt-1c-MgC" firstAttribute="trailing" secondItem="CfQ-4U-pqk" secondAttribute="trailing" id="dV0-qM-cTx"/>
                                 <constraint firstItem="Luq-2U-oAI" firstAttribute="centerX" secondItem="fsu-jz-l5k" secondAttribute="centerX" id="gsk-HS-7Tj"/>
                                 <constraint firstItem="r5D-BV-GbV" firstAttribute="top" secondItem="ldt-1c-MgC" secondAttribute="bottom" id="gwb-hI-72h"/>
-                                <constraint firstItem="CfQ-4U-pqk" firstAttribute="leading" secondItem="fsu-jz-l5k" secondAttribute="leading" constant="28" id="kIe-dR-h1h"/>
+                                <constraint firstItem="CfQ-4U-pqk" firstAttribute="leading" secondItem="fsu-jz-l5k" secondAttribute="leading" constant="24" id="kIe-dR-h1h"/>
                                 <constraint firstItem="LRJ-4W-TQh" firstAttribute="leading" secondItem="CfQ-4U-pqk" secondAttribute="leading" id="kWJ-J6-bwV"/>
                                 <constraint firstItem="9gJ-2i-gqt" firstAttribute="top" secondItem="aNX-Xj-u7E" secondAttribute="bottom" id="odN-1G-PQM"/>
                                 <constraint firstItem="aNX-Xj-u7E" firstAttribute="centerX" secondItem="fsu-jz-l5k" secondAttribute="centerX" id="q9b-pV-YzQ"/>
@@ -174,6 +174,10 @@ bấm gửi lại qua</string>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRd-pb-iKZ">
                     <rect key="frame" x="358" y="64" width="36" height="36"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="36" id="7BY-aX-QuY"/>
+                        <constraint firstAttribute="height" constant="36" id="m3q-eS-g70"/>
+                    </constraints>
                     <state key="normal" image="ic_close"/>
                     <connections>
                         <action selector="onCloseTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="fpG-nr-jBn"/>
@@ -194,7 +198,7 @@ bấm gửi lại qua</string>
                 <outlet property="lbError" destination="ldt-1c-MgC" id="ezQ-sh-qXM"/>
                 <outlet property="lbLoading" destination="ThH-IL-dgd" id="Ine-P6-NZW"/>
                 <outlet property="lbResendOTP" destination="LRJ-4W-TQh" id="QNI-PD-J2f"/>
-                <outlet property="lbTitle" destination="CfQ-4U-pqk" id="0aZ-th-DB9"/>
+                <outlet property="lbTitle" destination="CfQ-4U-pqk" id="ihB-FW-TAz"/>
                 <outlet property="otpBoxContainerView" destination="Utq-Gq-bk3" id="Sjq-eh-Dv4"/>
                 <outlet property="otpInputContainerView" destination="fsu-jz-l5k" id="Qwj-bg-FDI"/>
                 <outlet property="overlayView" destination="NXT-qi-E5K" id="kXo-9q-abS"/>

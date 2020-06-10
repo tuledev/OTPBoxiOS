@@ -15,6 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
  +(void)mockAPIsCompletionCallback: (void(^)(NSString * error))callback;
  +(void)mockAPIsCompletionWithErrorCallback: (void(^)(NSString * error))callback;
 
++ (APIs *)sharedInstance;
+
+ - (void)getInfo: (void(^)(NSDictionary *data, NSError * error))callback;
+
 @end
 
 NS_ASSUME_NONNULL_END
