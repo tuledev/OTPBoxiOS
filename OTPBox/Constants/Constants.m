@@ -15,3 +15,5 @@
 
 #define NORMAL_TEXT_FONT [UIFont fontWithName:@"HelveticaNeue" size:14]
 #define BOLD_TEXT_FONT [UIFont fontWithName:@"HelveticaNeue-Bold" size:14]
+
+#define OTPBOX_BUNDLE_ID @"Digipay.OTPBox"

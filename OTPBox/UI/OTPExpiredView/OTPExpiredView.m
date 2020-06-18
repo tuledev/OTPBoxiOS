@@ -8,6 +8,7 @@
 
 #import "OTPExpiredView.h"
 #import "../../Controller/OTPConfigManager.h"
+#import "../../Utils/Formatter.h"
 
 @interface OTPExpiredView()
 
@@ -47,7 +48,8 @@
 - (void)renderWithReport: (BOOL)canReport {
     if (canReport) {
         [self.containerView bringSubviewToFront:self.viewWithReport];
-        self.lbDetail.text = OTPConfigManager.sharedInstance.timeoutText;
+        self.lbDetail.attributedText = [Formatter formatText:OTPConfigManager.sharedInstance.timeoutText
+                                              data:@{}];
         self.viewWithoutReport.alpha = 0;
     } else {
         [self.containerView bringSubviewToFront:self.viewWithoutReport];

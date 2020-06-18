@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "../Utils/UIColor+hex.m"
-#import "../Style/Constants.m"
+#import "../Constants/Constants.m"
 
 @interface UILabel(Boldify)
 

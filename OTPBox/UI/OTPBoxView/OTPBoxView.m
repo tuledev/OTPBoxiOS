@@ -18,8 +18,9 @@
 #import "../OTPInputPhoneView/OTPInputPhoneView.h"
 #import "../../Controller/OTPConfigManager.h"
 #import "../../Utils/UILabel+Boldify.m"
-#import "../../Style/Constants.m"
+#import "../../Constants/Constants.m"
 #import "../../Utils/Formatter.h"
+#import "../../Utils/Helper.h"
 
 @interface OTPBoxView()
 
@@ -105,11 +106,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    [OTPBoxView loadFontWithName:@"Font Awesome 5 Brands-Regular-400"];
-    [OTPBoxView loadFontWithName:@"Font Awesome 5 Duotone-Solid-900"];
-    [OTPBoxView loadFontWithName:@"Font Awesome 5 Pro-Light-300"];
-    [OTPBoxView loadFontWithName:@"Font Awesome 5 Pro-Regular-400"];
-    [OTPBoxView loadFontWithName:@"Font Awesome 5 Pro-Solid-900"];
+    [OTPBoxView loadFont];
     self.tfOTP.delegate = self;
     self.loading = NO;
     self.expired = NO;
@@ -157,31 +154,13 @@
     }];
 }
 
-+ (void)loadFontWithName:(NSString *)fontName
++ (void)loadFont
 {
-    NSString *fontPath = [[NSBundle bundleForClass:[OTPBoxView class]] pathForResource:fontName ofType:@"otf"];
-    NSData *fontData = [NSData dataWithContentsOfFile:fontPath];
-    
-    CGDataProviderRef provider = CGDataProviderCreateWithCFData((CFDataRef)fontData);
-    
-    if (provider)
-    {
-        CGFontRef font = CGFontCreateWithDataProvider(provider);
-        
-        if (font)
-        {
-            CFErrorRef error = NULL;
-            if (CTFontManagerRegisterGraphicsFont(font, &error) == NO)
-            {
-                CFStringRef errorDescription = CFErrorCopyDescription(error);
-                CFRelease(errorDescription);
-            }
-            
-            CFRelease(font);
-        }
-        
-        CFRelease(provider);
-    }
+    [Helper loadFontWithName:@"Font Awesome 5 Brands-Regular-400"];
+    [Helper loadFontWithName:@"Font Awesome 5 Duotone-Solid-900"];
+    [Helper loadFontWithName:@"Font Awesome 5 Pro-Light-300"];
+    [Helper loadFontWithName:@"Font Awesome 5 Pro-Regular-400"];
+    [Helper loadFontWithName:@"Font Awesome 5 Pro-Solid-900"];
 }
 
 // init config
