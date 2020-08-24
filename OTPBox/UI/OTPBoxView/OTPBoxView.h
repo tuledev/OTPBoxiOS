@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @optional
 - (void)onResultHandler:(BOOL)success;
+- (void)onReportHandler: (NSDictionary *) dict;
 
 @end
 

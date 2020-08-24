@@ -139,9 +139,9 @@
     __weak OTPBoxView *weakSelf = self;
     [self fetchResult:^(NSDictionary *data, NSString *error) {
         __strong OTPBoxView *strongSelf = weakSelf;
-        if (strongSelf && [strongSelf.delegate respondsToSelector:@selector(onResultHandler:)]) {
+        if (strongSelf && [strongSelf.delegate respondsToSelector:@selector(onReportHandler:)]) {
             NSLog(@"result data %@", data);
-            [strongSelf.delegate onResultHandler:YES];
+            [strongSelf.delegate onReportHandler:data];
         }
     }];
     self.alpha = 1;
