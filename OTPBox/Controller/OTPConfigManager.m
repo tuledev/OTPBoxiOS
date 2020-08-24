@@ -77,8 +77,8 @@
     self.otpWrongLimit = otpWrongLimit;
     self.resendText = resendText;
     self.resendByText = resendByText;
-    self.resendTimeout = 6;//resendTimeout;
-    self.sessionTimeout = 1;// sessionTimeout;
+    self.resendTimeout = resendTimeout;
+    self.sessionTimeout = sessionTimeout;
     self.resendLimit = resendLimit;
     self.reportText = reportText;
     self.canUserReport = canUserReport;

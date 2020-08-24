@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,33 +20,32 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="Utq-Gq-bk3">
-                    <rect key="frame" x="57" y="186" width="300" height="270"/>
+                    <rect key="frame" x="39.5" y="188" width="335" height="266"/>
                     <subviews>
                         <view contentMode="scaleToFill" horizontalHuggingPriority="900" verticalHuggingPriority="900" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="900" translatesAutoresizingMaskIntoConstraints="NO" id="NXT-qi-E5K" userLabel="OverlayView">
-                            <rect key="frame" x="0.0" y="0.0" width="300" height="270"/>
+                            <rect key="frame" x="0.0" y="0.0" width="335" height="266"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <viewLayoutGuide key="safeArea" id="n5J-8P-VHR"/>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fsu-jz-l5k" userLabel="InputOTP">
-                            <rect key="frame" x="0.0" y="0.0" width="300" height="270"/>
+                            <rect key="frame" x="0.0" y="0.0" width="335" height="266"/>
                             <subviews>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="leq-WD-bSd" userLabel="textfield">
-                                    <rect key="frame" x="150" y="70" width="0.0" height="30"/>
+                                    <rect key="frame" x="167.5" y="68" width="0.0" height="34"/>
                                     <constraints>
                                         <constraint firstAttribute="width" id="wR4-ag-qyv"/>
                                     </constraints>
-                                    <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nhập 4 mã xác thực được gửi bằng Tin nhắn tới số điện thoại xxx 7124 " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CfQ-4U-pqk" userLabel="title">
-                                    <rect key="frame" x="24" y="16" width="252" height="33"/>
+                                    <rect key="frame" x="20" y="16" width="295" height="33"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" horizontalHuggingPriority="900" verticalHuggingPriority="900" horizontalCompressionResistancePriority="900" verticalCompressionResistancePriority="900" translatesAutoresizingMaskIntoConstraints="NO" id="aNX-Xj-u7E" userLabel="input">
-                                    <rect key="frame" x="125" y="65" width="50" height="40"/>
+                                    <rect key="frame" x="142.5" y="65" width="50" height="40"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="XJV-f3-Iq2"/>
@@ -56,7 +53,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9gJ-2i-gqt" userLabel="error_padding">
-                                    <rect key="frame" x="149.5" y="105" width="1" height="0.0"/>
+                                    <rect key="frame" x="167" y="105" width="1" height="0.0"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="1" id="Yxk-eZ-x3m"/>
@@ -64,13 +61,13 @@
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="253" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ldt-1c-MgC" userLabel="error">
-                                    <rect key="frame" x="24" y="105" width="252" height="0.0"/>
+                                    <rect key="frame" x="20" y="105" width="295" height="0.0"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                     <color key="textColor" red="0.73725490196078436" green="0.058823529411764705" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r5D-BV-GbV" userLabel="loading_padding">
-                                    <rect key="frame" x="149.5" y="105" width="1" height="20"/>
+                                    <rect key="frame" x="167" y="105" width="1" height="20"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" relation="lessThanOrEqual" constant="20" id="eKa-Kh-zMF"/>
@@ -78,7 +75,7 @@
                                     </constraints>
                                 </view>
                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v88-W7-ICQ" userLabel="loading">
-                                    <rect key="frame" x="99.5" y="125" width="101.5" height="20"/>
+                                    <rect key="frame" x="117" y="125" width="101.5" height="20"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="253" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Đang kiểm tra" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ThH-IL-dgd" userLabel="loading">
                                             <rect key="frame" x="26" y="3.5" width="75.5" height="13"/>
@@ -102,7 +99,7 @@
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="253" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LRJ-4W-TQh" userLabel="note">
-                                    <rect key="frame" x="24" y="177" width="252" height="33"/>
+                                    <rect key="frame" x="20" y="173" width="295" height="33"/>
                                     <string key="text">Nếu không nhận được mã xác thực,
 bấm gửi lại qua</string>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
@@ -110,7 +107,7 @@ bấm gửi lại qua</string>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="901" verticalHuggingPriority="901" horizontalCompressionResistancePriority="901" verticalCompressionResistancePriority="901" translatesAutoresizingMaskIntoConstraints="NO" id="Luq-2U-oAI" userLabel="action">
-                                    <rect key="frame" x="125" y="230" width="50" height="24"/>
+                                    <rect key="frame" x="142.5" y="226" width="50" height="24"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="24" id="X3G-8F-x0n"/>
@@ -127,10 +124,10 @@ bấm gửi lại qua</string>
                                 <constraint firstItem="9gJ-2i-gqt" firstAttribute="height" secondItem="ldt-1c-MgC" secondAttribute="height" priority="900" id="ALo-zP-A3P"/>
                                 <constraint firstItem="r5D-BV-GbV" firstAttribute="bottom" secondItem="v88-W7-ICQ" secondAttribute="top" id="CiJ-WO-QdL"/>
                                 <constraint firstAttribute="bottom" secondItem="Luq-2U-oAI" secondAttribute="bottom" constant="16" id="GGG-7o-xPk"/>
-                                <constraint firstItem="LRJ-4W-TQh" firstAttribute="top" secondItem="v88-W7-ICQ" secondAttribute="bottom" constant="32" id="ICr-jk-lN8"/>
+                                <constraint firstItem="LRJ-4W-TQh" firstAttribute="top" secondItem="v88-W7-ICQ" secondAttribute="bottom" constant="28" id="ICr-jk-lN8"/>
                                 <constraint firstItem="r5D-BV-GbV" firstAttribute="height" secondItem="v88-W7-ICQ" secondAttribute="height" priority="900" id="Ksn-c5-bps"/>
                                 <constraint firstItem="LRJ-4W-TQh" firstAttribute="trailing" secondItem="CfQ-4U-pqk" secondAttribute="trailing" id="Kwp-2d-y7v"/>
-                                <constraint firstAttribute="trailing" secondItem="CfQ-4U-pqk" secondAttribute="trailing" constant="24" id="MBz-qW-6vC"/>
+                                <constraint firstAttribute="trailing" secondItem="CfQ-4U-pqk" secondAttribute="trailing" constant="20" id="MBz-qW-6vC"/>
                                 <constraint firstItem="leq-WD-bSd" firstAttribute="centerX" secondItem="aNX-Xj-u7E" secondAttribute="centerX" id="W1I-1Y-mk8"/>
                                 <constraint firstItem="ldt-1c-MgC" firstAttribute="top" secondItem="9gJ-2i-gqt" secondAttribute="bottom" id="W3q-nX-Ukx"/>
                                 <constraint firstItem="CfQ-4U-pqk" firstAttribute="top" secondItem="fsu-jz-l5k" secondAttribute="top" constant="16" id="ZAB-od-m9U"/>
@@ -138,7 +135,7 @@ bấm gửi lại qua</string>
                                 <constraint firstItem="ldt-1c-MgC" firstAttribute="trailing" secondItem="CfQ-4U-pqk" secondAttribute="trailing" id="dV0-qM-cTx"/>
                                 <constraint firstItem="Luq-2U-oAI" firstAttribute="centerX" secondItem="fsu-jz-l5k" secondAttribute="centerX" id="gsk-HS-7Tj"/>
                                 <constraint firstItem="r5D-BV-GbV" firstAttribute="top" secondItem="ldt-1c-MgC" secondAttribute="bottom" id="gwb-hI-72h"/>
-                                <constraint firstItem="CfQ-4U-pqk" firstAttribute="leading" secondItem="fsu-jz-l5k" secondAttribute="leading" constant="24" id="kIe-dR-h1h"/>
+                                <constraint firstItem="CfQ-4U-pqk" firstAttribute="leading" secondItem="fsu-jz-l5k" secondAttribute="leading" constant="20" id="kIe-dR-h1h"/>
                                 <constraint firstItem="LRJ-4W-TQh" firstAttribute="leading" secondItem="CfQ-4U-pqk" secondAttribute="leading" id="kWJ-J6-bwV"/>
                                 <constraint firstItem="9gJ-2i-gqt" firstAttribute="top" secondItem="aNX-Xj-u7E" secondAttribute="bottom" id="odN-1G-PQM"/>
                                 <constraint firstItem="aNX-Xj-u7E" firstAttribute="centerX" secondItem="fsu-jz-l5k" secondAttribute="centerX" id="q9b-pV-YzQ"/>
@@ -159,7 +156,7 @@ bấm gửi lại qua</string>
                         <constraint firstAttribute="trailing" secondItem="fsu-jz-l5k" secondAttribute="trailing" priority="900" id="275-nL-Dig"/>
                         <constraint firstItem="NXT-qi-E5K" firstAttribute="centerY" secondItem="Utq-Gq-bk3" secondAttribute="centerY" id="BFX-rs-tMr"/>
                         <constraint firstItem="fsu-jz-l5k" firstAttribute="top" secondItem="Utq-Gq-bk3" secondAttribute="top" priority="900" id="OJ1-xc-fxO"/>
-                        <constraint firstAttribute="width" constant="300" id="eji-3x-b81"/>
+                        <constraint firstAttribute="width" constant="335" id="eji-3x-b81"/>
                         <constraint firstItem="NXT-qi-E5K" firstAttribute="width" secondItem="Utq-Gq-bk3" secondAttribute="width" id="fSf-J2-71W"/>
                         <constraint firstItem="NXT-qi-E5K" firstAttribute="height" secondItem="Utq-Gq-bk3" secondAttribute="height" priority="250" id="hwb-0M-ZPx"/>
                         <constraint firstItem="fsu-jz-l5k" firstAttribute="leading" secondItem="Utq-Gq-bk3" secondAttribute="leading" priority="900" id="iP1-TG-lap"/>
@@ -173,7 +170,7 @@ bấm gửi lại qua</string>
                     </userDefinedRuntimeAttributes>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRd-pb-iKZ">
-                    <rect key="frame" x="358" y="64" width="36" height="36"/>
+                    <rect key="frame" x="358" y="54" width="36" height="36"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="36" id="7BY-aX-QuY"/>
                         <constraint firstAttribute="height" constant="36" id="m3q-eS-g70"/>
@@ -187,7 +184,7 @@ bấm gửi lại qua</string>
             <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="Utq-Gq-bk3" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="18b-dE-hXv"/>
-                <constraint firstItem="gRd-pb-iKZ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="2rF-gf-fTq"/>
+                <constraint firstItem="gRd-pb-iKZ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="2rF-gf-fTq"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="gRd-pb-iKZ" secondAttribute="trailing" constant="20" id="RmA-QC-Pb1"/>
                 <constraint firstItem="Utq-Gq-bk3" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" multiplier="2.15/3" id="T2W-TJ-cQw"/>
             </constraints>

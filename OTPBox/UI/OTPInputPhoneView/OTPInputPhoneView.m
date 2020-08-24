@@ -10,7 +10,7 @@
 #import "../../Utils/UIColor+hex.m"
 #import "../OTPActionView/OTPActionItem.h"
 #import "../OTPActionView/OTPActionView.h"
-
+#import "../../Controller/OTPConfigManager.h"
 
 
 @interface OTPInputPhoneView()
@@ -87,7 +87,11 @@
 }
 - (IBAction)onSendOTPTapped:(id)sender {
     if ([self.delegate respondsToSelector:@selector(onSMSTapped)]) {
-        [self.delegate onSMSTapped];
+        if ([OTPConfigManager.sharedInstance.defautOTPMethod isEqualToNumber:@0]) {
+            [self.delegate onCallTapped];
+        } else {
+            [self.delegate onSMSTapped];
+        }
     }
 }
 

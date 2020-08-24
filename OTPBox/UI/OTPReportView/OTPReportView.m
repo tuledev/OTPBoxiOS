@@ -30,7 +30,7 @@
 */
 
 - (void)startCountDown {
-    self.countdown = 3;
+    self.countdown = 30;
     
     if (self.timer) {
         [self.timer invalidate];

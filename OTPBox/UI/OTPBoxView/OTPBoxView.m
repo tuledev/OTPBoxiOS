@@ -175,6 +175,7 @@
         NSLog(@"Error: %@", error);
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             self.phoneNumber = phonenumber;
+            NSLog(@"%@",phonenumber);
             [self renderWithConfig];
             if ([phonenumber isEqualToString:@""]) {
                 [self showInputPhoneView];
@@ -409,7 +410,7 @@
 
 - (void)removeOverlayView {
     self.heightConstraintOPTBoxView.priority = 200;
-    [UIView animateWithDuration:0.35f animations:^{
+    [UIView animateWithDuration:0.2f animations:^{
         [self.otpBoxContainerView layoutIfNeeded];
         self.overlayView.alpha = 0;
         self.otpInputContainerView.alpha = 1;
@@ -472,6 +473,7 @@
         self.expiredView = expiredView;
         self.expiredView.delegate = self;
     }
+    [self endEditing:YES];
     [self showOverlayView:self.expiredView];
 }
 
@@ -482,20 +484,10 @@
 - (void)showReportView: (NSDictionary *)data {
     if (self.reportView == nil) {
         self.reportView = [OTPReportView loadFromNIB];
+        self.reportView.delegate = self;
     }
-    [self.reportView layoutIfNeeded];
-    self.reportView.delegate = self;
-    self.overlayView.frame = self.reportView.frame;
-    self.heightConstraintOPTBoxView.priority = 999;
-    [self.overlayView addSubview:self.reportView];
-    [self.otpBoxContainerView bringSubviewToFront:self.overlayView];
-    self.otpInputContainerView.alpha = 0;
-    [UIView animateWithDuration:0.35f animations:^{
-        [self.reportView updateData:data];
-        self.overlayView.alpha = 1;
-        [self setNeedsUpdateConstraints];
-        [self layoutIfNeeded];
-    }];
+    [self endEditing:YES];
+    [self showOverlayView:self.reportView];
 }
 
 - (void)showLoading: (BOOL) loading text:(NSString *)text {
@@ -545,6 +537,7 @@
     self.currentMethod = @0;
     [self removeOverlayView];
     [self renderTitle];
+    [self showError:@""];
     
     if (self.sessionStarted) {
         [self startOTPTurn];
@@ -557,6 +550,7 @@
     self.currentMethod = @1;
     [self removeOverlayView];
     [self renderTitle];
+    [self showError:@""];
     
     if (self.sessionStarted) {
         [self startOTPTurn];
@@ -582,9 +576,12 @@
 - (void)onReportTapped {
     [self showInitLoading];
     [self sendReport:^(NSDictionary *data, NSString *error) {
-        [self removeInitLoading];
-        [self.expiredView removeFromSuperview];
-        [self showReportView: data];
+//        [self removeInitLoading];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.expiredView removeFromSuperview];
+            [self showReportView: data];
+        });
+      
     }];
 }
 

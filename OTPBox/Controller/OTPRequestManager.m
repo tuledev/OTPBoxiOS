@@ -45,14 +45,21 @@
             if (success) {
                 NSDictionary * data = (NSDictionary *)[response objectForKey:@"data"];
                 NSDictionary * otpBoxData = (NSDictionary * )[data objectForKey:@"otpbox_data"];
+                NSLog(@"%@ config", otpBoxData);
+                
                 NSNumber * defaultOTPMethod = [(NSString *)[otpBoxData objectForKey:@"default"] isEqualToString:@"voice"] ? @0 : @1;
+                NSLog(@"%@ %@ config defaultOTPMethod", defaultOTPMethod, [otpBoxData objectForKey:@"default"]);
+                
                 NSMutableArray<NSNumber *> * visibleMethod = [NSMutableArray new];
-                if ([[otpBoxData objectForKey:@"voice_allow"] boolValue]) {
+                
+                if ([otpBoxData objectForKey:@"voice_allow"] != (id)[NSNull null]  && [[otpBoxData objectForKey:@"voice_allow"] boolValue]) {
                     [visibleMethod addObject:@0];
                 }
-                if ([[otpBoxData objectForKey:@"sms_allow"] boolValue]) {
+                
+                if ([otpBoxData objectForKey:@"sms_allow"] != (id)[NSNull null]  && [[otpBoxData objectForKey:@"sms_allow"] boolValue]) {
                     [visibleMethod addObject:@1];
                 }
+                
                 NSString * title = (NSString *)[otpBoxData objectForKey:@"description_sent_code"];
                 NSString * timeoutText = (NSString *)[otpBoxData objectForKey:@"description_timeout"];
                 NSInteger codeLength = [[otpBoxData objectForKey:@"code_length"] integerValue];

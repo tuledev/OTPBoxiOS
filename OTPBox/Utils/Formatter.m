@@ -18,6 +18,13 @@
     NSMutableAttributedString *attributedString =
     [[NSMutableAttributedString alloc] initWithString:text
                                            attributes:@{ NSFontAttributeName : font, NSForegroundColorAttributeName: NORMAL_TEXT_COLOR}];
+    
+    NSMutableParagraphStyle * style = [NSMutableParagraphStyle new];
+    style.lineHeightMultiple = 1.3;
+    style.alignment = NSTextAlignmentCenter;
+    
+    [attributedString addAttributes:@{ NSParagraphStyleAttributeName: style } range:NSMakeRange(0, attributedString.length)];
+    
     return attributedString;
 }
 
