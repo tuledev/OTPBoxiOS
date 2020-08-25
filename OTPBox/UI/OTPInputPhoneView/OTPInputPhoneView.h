@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "../OTPActionView/OTPActionDelegate.h"
+#import <OTPBox/OTPActionDelegate.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
