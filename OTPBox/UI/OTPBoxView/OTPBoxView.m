@@ -68,6 +68,26 @@
 @implementation OTPBoxView 
 @synthesize viewInputOTP;
 
++ (OTPBoxView *)createOTPBoxView {
+    NSArray *bundle = [[NSBundle bundleWithIdentifier:@"Digipay.OTPBox"] loadNibNamed:@"OTPBoxView"
+                                                                                owner:self options:nil];
+    OTPBoxView *otpBoxView;
+    for (id object in bundle) {
+        if ([object isKindOfClass:[OTPBoxView class]]) {
+            otpBoxView = (OTPBoxView *)object;
+            break;
+        }
+    }
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    CGFloat screenHeight = screenRect.size.height;
+    otpBoxView.frame = CGRectMake(0, 0, screenWidth, screenHeight);
+    
+    [otpBoxView initConfig:@""];
+    
+    return otpBoxView;
+}
+
 + (OTPBoxView *)showIn: (UIView *)superview {
     NSArray *bundle = [[NSBundle bundleWithIdentifier:@"Digipay.OTPBox"] loadNibNamed:@"OTPBoxView"
                                                                                 owner:self options:nil];

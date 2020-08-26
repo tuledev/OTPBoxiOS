@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "OTPBox"
-  spec.version      = "0.0.4"
+  spec.version      = "0.0.6"
   spec.summary      = "OTPBox Project"
 
   # This description is used to generate tags and improve search results.
