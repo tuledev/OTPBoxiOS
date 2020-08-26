@@ -1,0 +1,6 @@
+framework module OTPBox {
+  umbrella header "OTPBox.h"
+
+  export *
+  module * { export * }
+}
